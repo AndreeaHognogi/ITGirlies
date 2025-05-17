@@ -1,19 +1,78 @@
-plugins {
-    id 'java'
-}
+allprojects {
+    group 'ro.ubb.testing'
+    version '1.0-SNAPSHOT'
 
-group = 'ro.ubbcluj'
-version = '1.0-SNAPSHOT'
+    apply plugin: 'java'
 
-repositories {
-    mavenCentral()
-}
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
 
-test {
-    useJUnitPlatform()
+    repositories {
+        mavenCentral()
+    }
+    ext {
+        springVersion = '6.2.2'
+        springDataVersion = '3.4.1'
+        hibernateVersion = '6.6.4.Final'
+
+        postgresqlVersion = '42.7.5'
+        dbcpVersion = '2.13.0'
+
+        caffeineVersion = '2.6.1'
+        hikariVersion = '3.2.0'
+        jaxbapiVersion = '4.0.2'
+
+        guavaVersion = '21.0'
+        jacksonDatabindVersion = '2.18.2'
+        javaxServeletApiVersion = '6.1.0'
+
+        slf4jVersion = '2.0.16'
+        log4jVersion = '2.24.3'
+
+        jacksonDatabindVersion = '2.18.2'
+        javaxServeletApiVersion = '6.1.0'
+
+        lombokVersion = '1.18.4'
+    }
+
+    dependencies {
+        testImplementation group: 'junit', name: 'junit', version: '4.13.2' // Versiune mai nouă
+
+        implementation group: 'org.springframework', name: 'spring-context', version: "$springVersion"
+        implementation group: 'org.springframework', name: 'spring-jdbc', version: "$springVersion"
+        implementation group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
+        implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: "$dbcpVersion"
+
+        // Logging dependencies
+        implementation group: 'org.slf4j', name: 'slf4j-api', version: "$slf4jVersion"
+        testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: "$slf4jVersion"
+
+        implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: "$log4jVersion"
+        implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$log4jVersion"
+        implementation group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: "$log4jVersion"
+
+        // Exclude commons-logging as it is not needed with SLF4J
+        configurations.all {
+            exclude group: 'commons-logging', module: 'commons-logging'
+        }
+
+        // JPA dependencies
+        implementation group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
+        implementation group: 'org.springframework', name: 'spring-orm', version: "$springVersion"
+        implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: "$springDataVersion"
+        implementation group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
+        implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: "$caffeineVersion"
+        implementation group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
+//        implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
+        implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: "$jaxbapiVersion"
+
+
+        //lombok
+//        implementation group: 'org.projectlombok', name: 'lombok', version: "$lombokVersion"
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+        }
 }
