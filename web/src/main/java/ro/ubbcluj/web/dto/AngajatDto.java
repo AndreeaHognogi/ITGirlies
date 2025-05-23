@@ -1,25 +1,18 @@
-package ro.ubbcluj.core.Model;
+package ro.ubbcluj.web.dto;
 
-import jakarta.persistence.Entity;
 import lombok.*;
+import ro.ubbcluj.core.Model.Specializare;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=true)
 @ToString
 @Builder
-public class Angajat extends BaseEntity<Long>{
+public class AngajatDto extends BaseDto{
     private String nume;
     private Integer salariu;
     private Specializare specializare;
     private Boolean disponibilitate;
     private Boolean contValidat;
-
-    public Angajat(Angajat angajat) {
-        super();
-    }
 }
-

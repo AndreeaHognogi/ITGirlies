@@ -2,6 +2,7 @@ package ro.ubbcluj.web.Config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import ro.ubbcluj.core.Config.JPAConfig;
 
 @Configuration
 @ComponentScan({"ro.ubbcluj.core"})
