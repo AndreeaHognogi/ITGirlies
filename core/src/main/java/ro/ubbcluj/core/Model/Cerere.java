@@ -15,7 +15,8 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Cerere implements Serializable {
+@Builder
+public class Cerere extends BaseEntity<Long> implements Serializable {
 
     @Id
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -35,4 +36,5 @@ public class Cerere implements Serializable {
 
     @Column(name = "status")
     private Boolean status;
+
 }

@@ -15,4 +15,8 @@ public class Locatar extends BaseEntity<Long>{
     private String nume;
     private Integer numarCamera;
     private Boolean contValidat;
+
+    public Locatar(Locatar locatar) {
+        super();
+    }
 }
