@@ -14,10 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
-@Builder
-public class Cerere extends BaseEntity<Long> implements Serializable {
-
+public class Cerere implements Serializable {
     @Id
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "locatar_id")
@@ -37,4 +34,14 @@ public class Cerere extends BaseEntity<Long> implements Serializable {
     @Column(name = "status")
     private Boolean status;
 
+    @Override
+    public String toString() {
+        return "Cerere{" +
+                "locatar=" + locatar +
+                ", angajat=" + angajat +
+                ", problema='" + problema + '\'' +
+                ", categorie=" + categorie +
+                ", status=" + status +
+                '}';
+    }
 }
