@@ -1,0 +1,127 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #78a8ba;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.top-banner {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  padding: 18px 0;
+  color: #002b5c;
+  font-size: 23px;
+  line-height: 1.4;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.top-banner h1 {
+  font-size: 23px !important;
+  color: #002b5c !important;
+  font-family: 'Montserrat', sans-serif !important;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+
+.top-banner span {
+  color: #0b437f;
+}
+.top-banner p {
+  margin: 0;
+  font-weight: 400;
+}
+
+.login-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background-color: #78a8ba;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group .icon {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #666;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 10px 10px 32px;
+  border: 2px solid white;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: white;
+  opacity: 0.7;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  color: #002b5c;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.links a {
+  font-size: 12px;
+  color: white;
+  text-decoration: none;
+}
+
+.bottom-banner {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #002b5c;
+}

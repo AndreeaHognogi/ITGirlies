@@ -1,0 +1,196 @@
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #78a8ba;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Bara albă de sus */
+.top-banner {
+  position: relative;
+  width: 100%;
+  background-color: white;
+  padding: 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  height: 60px;
+}
+
+.banner-text {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.banner-text h1 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #002b5c;
+}
+
+.banner-text span {
+  color: #0b437f;
+  font-weight: bold;
+}
+
+.banner-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-logo img {
+  width: 60px;
+  height: auto;
+}
+
+.logout-btn-container {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+}
+
+.logout-btn {
+  background-color: white;
+  color: #002b5c;
+  border: 2px solid #002b5c;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.banner-left h1 {
+  margin: 0;
+  color: #002b5c;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.banner-left span {
+  color: #0b437f;
+}
+
+.banner-center .logo {
+  width: 60px;
+}
+
+.dashboard-wrapper {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+
+
+
+
+h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin: 20px 30px 10px;
+}
+
+.page-header h2 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.page-content {
+  flex-grow: 1;
+  padding: 0 30px;
+}
+
+.request-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  color: #002b5c;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+
+.card-info p {
+  margin: 0;
+  padding: 2px 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.accept-button,
+.decline-button {
+  padding: 8px 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.accept-button {
+  background-color: #003f7d;
+  color: white;
+  border: none;
+}
+
+.decline-button {
+  background-color: white;
+  color: #003f7d;
+  border: 2px solid #003f7d;
+}
+
+.bottom-banner {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #002b5c;
+}
+
+.status-button,
+.status-value {
+  padding: 8px 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 110px; 
+  text-align: center;
+}
+
+
+.status-button {
+  background-color: white;
+  color: #003f7d;
+  border: 2px solid #003f7d;
+  margin-right: 10px;
+}
+
+.status-value {
+  background-color: #003f7d;
+  color: white;
+  border: none;
+}

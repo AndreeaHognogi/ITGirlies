@@ -1,1 +1,58 @@
-<p>autentificare works!</p>
+<div class="top-banner">
+  <h1>
+    CĂMINUL <span>LOREM IPSUM</span><br />
+    BUN VENIT!
+  </h1>
+</div>
+
+<div class="login-wrapper">
+  <div class="login-box">
+    <img src="assets/logo.jpg" alt="logo" class="logo" />
+
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="form-group">
+        <i class="fa fa-user icon"></i>
+        <input
+          type="text"
+          placeholder="NUME"
+          name="nume"
+          [(ngModel)]="nume"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <i class="fa fa-user icon"></i>
+        <input
+          type="text"
+          placeholder="USERNAME"
+          name="email"
+          [(ngModel)]="email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <i class="fa fa-lock icon"></i>
+        <input
+          type="password"
+          placeholder="PAROLA"
+          name="parola"
+          [(ngModel)]="parola"
+          required
+        />
+      </div>
+
+      <button type="submit" [disabled]="!registerForm.form.valid">ÎNREGISTRARE</button>
+
+      <div class="links">
+        <a href="#">Recuperare parolă</a>
+        <a href="#">Înregistrare</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="bottom-banner">
+  © IT GIRLIES 2025
+</div>
