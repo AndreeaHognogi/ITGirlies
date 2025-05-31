@@ -16,8 +16,8 @@ public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
     @Override
     public Cerere convertDtoToModel(CerereDto cerereDto) {
     Cerere cerere = Cerere.builder()
-            .locatar(new Locatar(cerereDto.getLocatar()))
-            .angajat(new Angajat(cerereDto.getAngajat()))
+            .locatar(cerereDto.getLocatar())
+            .angajat(cerereDto.getAngajat())
             .problema(cerereDto.getProblema())
             .categorie(cerereDto.getCategorie())
             .status(cerereDto.getStatus())
