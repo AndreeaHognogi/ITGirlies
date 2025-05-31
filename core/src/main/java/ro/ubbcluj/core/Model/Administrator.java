@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Builder
 public class Administrator extends BaseEntity<Long>{
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "nume", nullable = false)
+    private String nume;
 
     @Column(name = "phone", nullable = false)
     private String phone;

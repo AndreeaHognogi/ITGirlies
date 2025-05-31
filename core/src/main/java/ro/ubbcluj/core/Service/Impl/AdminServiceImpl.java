@@ -37,11 +37,30 @@ public class AdminServiceImpl implements AdminService {
     public Administrator updateAdmin(Administrator administrator) {
         log.trace("updateAdmin --- method called");
         Administrator updateAdmin= adminRepository.findById(administrator.getId()).orElse(new Administrator());
-        updateAdmin.setName(administrator.getName());
+        updateAdmin.setNume(administrator.getNume());
         updateAdmin.setPhone(administrator.getPhone());
         updateAdmin.setEmail(administrator.getEmail());
         log.trace("updateAdmin --- method completed; result={}", updateAdmin);
         return updateAdmin;
+    }
+
+    @Override
+    public Administrator createAdministrator(String nume, String email, String phone) {
+        log.trace("createAdministrator: nume={}, email={}, phone={}",
+                nume, email, phone);
+
+        // Validate inputs
+        if (nume == null || nume.trim().isEmpty()) {
+            throw new IllegalArgumentException("Administrator name cannot be null or empty");
+        }
+
+        Administrator administrator = new Administrator();
+        administrator.setNume(nume);
+        administrator.setEmail(email);
+        administrator.setPhone(phone);
+
+        // Save the administrator using the repository
+        return adminRepository.save(administrator);
     }
 
     @Override

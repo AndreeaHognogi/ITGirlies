@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.ubbcluj.core.Model.Angajat;
+import ro.ubbcluj.core.Model.Specializare;
 import ro.ubbcluj.core.Repository.AngajatRepository;
 import ro.ubbcluj.core.Service.AngajatService;
 
@@ -37,7 +38,7 @@ public class AngajatServiceImpl implements AngajatService {
     public Angajat updateAngajat (Angajat angajat) {
         log.trace("updateAngajat --- method called");
         Angajat updateAngajat = angajatRepository.findById(angajat.getId()).orElse(new Angajat());
-        updateAngajat.setName(angajat.getName());
+        updateAngajat.setNume(angajat.getNume());
         updateAngajat.setSalariu(angajat.getSalariu());
         updateAngajat.setSpecializare(angajat.getSpecializare());
         updateAngajat.setDisponibilitate(angajat.getDisponibilitate());
@@ -45,6 +46,27 @@ public class AngajatServiceImpl implements AngajatService {
         updateAngajat.setContValidat(angajat.getContValidat());
         log.trace("updateAngajat --- method completed; result={}", updateAngajat);
         return updateAngajat;
+    }
+    @Override
+    public Angajat createAngajat(String nume, Integer salariu, Specializare specializare, Boolean disponibilitate, Boolean contValidat) {
+        log.trace("createAngajat: nume={}, salariu={},specializare={}, disponibilitate={}, contValidat={}",
+                nume, salariu,specializare, disponibilitate, contValidat);
+
+        // Validate inputs
+        if (nume == null || nume.trim().isEmpty()) {
+            throw new IllegalArgumentException("Angajat name cannot be null or empty");
+        }
+
+        Angajat angajat = new Angajat();
+        angajat.setNume(nume);
+        angajat.setSalariu(salariu);
+        angajat.setSpecializare(specializare);
+        angajat.setDisponibilitate(disponibilitate);
+        angajat.setContValidat(contValidat);
+
+
+        // Save the angajat using the repository
+        return angajatRepository.save(angajat);
     }
 
     @Override

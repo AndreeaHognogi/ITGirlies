@@ -2,10 +2,12 @@ package ro.ubbcluj.web.converter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import ro.ubbcluj.core.Model.Angajat;
 import ro.ubbcluj.core.Model.Specializare;
 import ro.ubbcluj.web.dto.AngajatDto;
 
+@Component
 public class AngajatConverter extends AbstractConverterBaseEntityConverter<Angajat, AngajatDto> {
     private static final Logger log = LoggerFactory.getLogger(AngajatConverter.class);
 

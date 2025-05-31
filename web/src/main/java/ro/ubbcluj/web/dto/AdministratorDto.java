@@ -10,4 +10,6 @@ import lombok.*;
 @Builder
 public class AdministratorDto extends BaseDto{
     private String nume;
+    private String email;
+    private String phone;
 }

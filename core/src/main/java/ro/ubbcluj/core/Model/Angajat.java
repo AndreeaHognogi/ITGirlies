@@ -26,7 +26,7 @@ public class Angajat extends BaseEntity<Long>{
 //    }
 
     @Column(name = "name", nullable = false)
-    private String name;
+    private String nume;
 
     @Column(name = "salariu", nullable = false)
     private Integer salariu;
