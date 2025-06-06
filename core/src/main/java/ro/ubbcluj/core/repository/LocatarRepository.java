@@ -1,6 +1,7 @@
-package ro.ubbcluj.core.Repository;
+package ro.ubbcluj.core.repository;
 
-import ro.ubbcluj.core.Model.Locatar;
+import ro.ubbcluj.core.model.Locatar;
+
 
 public interface LocatarRepository extends CerereRepository<Locatar, Long> {
 }

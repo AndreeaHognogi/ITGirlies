@@ -1,7 +1,7 @@
 package ro.ubbcluj.web.dto;
 
 import lombok.*;
-import ro.ubbcluj.core.Model.Specializare;
+import ro.ubbcluj.core.model.Specializare;
 
 @NoArgsConstructor
 @AllArgsConstructor

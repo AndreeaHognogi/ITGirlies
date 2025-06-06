@@ -1,14 +1,16 @@
-package ro.ubbcluj.core.Service.Impl;
+package ro.ubbcluj.core.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ro.ubbcluj.core.Model.Administrator;
-import ro.ubbcluj.core.Repository.AdminRepository;
-import ro.ubbcluj.core.Service.AdminService;
+import org.springframework.transaction.annotation.Transactional;
+import ro.ubbcluj.core.model.Administrator;
+import ro.ubbcluj.core.repository.AdminRepository;
+import ro.ubbcluj.core.service.AdminService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -26,13 +28,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Administrator addAdmin(Administrator administrator) {
-        log.trace("getAllAdmins --- method called");
-        Administrator result = adminRepository.save(administrator);
-        log.trace("getAllAdmins --- method completed; result={}", result);
+    public Optional<Administrator> findById(Long id) {
+        log.info("findById --- method called; admin={}", id);
+        Optional<Administrator> result = adminRepository.findById(id);
+        log.trace("findById --- method completed; result={}", result);
         return result;
     }
 
+//    @Override
+//    public Administrator addAdmin(Administrator administrator) {
+//        log.trace("getAllAdmins --- method called");
+//        Administrator result = adminRepository.save(administrator);
+//        log.trace("getAllAdmins --- method completed; result={}", result);
+//        return result;
+//    }
+
+    @Transactional
     @Override
     public Administrator updateAdmin(Administrator administrator) {
         log.trace("updateAdmin --- method called");
@@ -44,6 +55,7 @@ public class AdminServiceImpl implements AdminService {
         return updateAdmin;
     }
 
+    @Transactional
     @Override
     public Administrator createAdministrator(String nume, String email, String phone) {
         log.trace("createAdministrator: nume={}, email={}, phone={}",

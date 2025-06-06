@@ -3,7 +3,7 @@ package ro.ubbcluj.web.converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import ro.ubbcluj.core.Model.Administrator;
+import ro.ubbcluj.core.model.Administrator;
 import ro.ubbcluj.web.dto.AdministratorDto;
 
 @Component

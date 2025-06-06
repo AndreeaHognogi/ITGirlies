@@ -2,21 +2,31 @@ package ro.ubbcluj.web.converter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ro.ubbcluj.core.Model.Locatar;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ro.ubbcluj.core.model.Cerere;
+import ro.ubbcluj.core.model.Locatar;
 import ro.ubbcluj.web.dto.LocatarDto;
 
+@Component
 public class LocatarConverter extends AbstractConverterBaseEntityConverter<Locatar, LocatarDto> {
     private static final Logger log = LoggerFactory.getLogger(LocatarConverter.class);
 
+    private final CerereConverter cerereConverter;
+
+    @Autowired
+    public LocatarConverter(CerereConverter cerereConverter) {
+        this.cerereConverter = cerereConverter;
+    }
 
     @Override
     public Locatar convertDtoToModel(LocatarDto locatarDto) {
-        Locatar locatar = Locatar.builder()
-                .nume(locatarDto.getNume())
-                .numarCamera(locatarDto.getNumarCamera())
-                .contValidat(locatarDto.getContValidat())
-                .build();
-        locatar.setId(locatarDto.getId());
+        Locatar locatar = new Locatar();
+        Cerere cerere = new Cerere();
+        cerere.setId(1L);
+                locatar.setNume(locatarDto.getNume());
+                locatar.setNumarCamera(locatarDto.getNumarCamera());
+                locatar.setContValidat(locatarDto.getContValidat());
         return locatar;
     }
 

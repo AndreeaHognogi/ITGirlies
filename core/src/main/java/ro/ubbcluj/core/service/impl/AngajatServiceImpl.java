@@ -1,15 +1,17 @@
-package ro.ubbcluj.core.Service.Impl;
+package ro.ubbcluj.core.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ro.ubbcluj.core.Model.Angajat;
-import ro.ubbcluj.core.Model.Specializare;
-import ro.ubbcluj.core.Repository.AngajatRepository;
-import ro.ubbcluj.core.Service.AngajatService;
+import org.springframework.transaction.annotation.Transactional;
+import ro.ubbcluj.core.model.Angajat;
+import ro.ubbcluj.core.model.Specializare;
+import ro.ubbcluj.core.repository.AngajatRepository;
+import ro.ubbcluj.core.service.AngajatService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AngajatServiceImpl implements AngajatService {
@@ -27,13 +29,23 @@ public class AngajatServiceImpl implements AngajatService {
     }
 
     @Override
-    public Angajat addAngajat(Angajat angajat) {
+    public Optional<Angajat> findById(Long id) {
+        log.info("findById --- method called; angajat={}", id);
+        Optional<Angajat> result = angajatRepository.findById(id);
+        log.info("findOne --- method completed; result={}", result);
+        return result;
+    }
+
+    @Transactional
+    @Override
+    public Angajat createAngajat(Angajat angajat) {
         log.trace("getAllAngajati --- method called");
         Angajat result = angajatRepository.save(angajat);
         log.trace("getAllAngajati --- method completed; result={}", result);
         return result;
     }
 
+    @Transactional
     @Override
     public Angajat updateAngajat (Angajat angajat) {
         log.trace("updateAngajat --- method called");
@@ -47,27 +59,27 @@ public class AngajatServiceImpl implements AngajatService {
         log.trace("updateAngajat --- method completed; result={}", updateAngajat);
         return updateAngajat;
     }
-    @Override
-    public Angajat createAngajat(String nume, Integer salariu, Specializare specializare, Boolean disponibilitate, Boolean contValidat) {
-        log.trace("createAngajat: nume={}, salariu={},specializare={}, disponibilitate={}, contValidat={}",
-                nume, salariu,specializare, disponibilitate, contValidat);
-
-        // Validate inputs
-        if (nume == null || nume.trim().isEmpty()) {
-            throw new IllegalArgumentException("Angajat name cannot be null or empty");
-        }
-
-        Angajat angajat = new Angajat();
-        angajat.setNume(nume);
-        angajat.setSalariu(salariu);
-        angajat.setSpecializare(specializare);
-        angajat.setDisponibilitate(disponibilitate);
-        angajat.setContValidat(contValidat);
-
-
-        // Save the angajat using the repository
-        return angajatRepository.save(angajat);
-    }
+//    @Override
+//    public Angajat createAngajat(String nume, Integer salariu, Specializare specializare, Boolean disponibilitate, Boolean contValidat) {
+//        log.trace("createAngajat: nume={}, salariu={},specializare={}, disponibilitate={}, contValidat={}",
+//                nume, salariu,specializare, disponibilitate, contValidat);
+//
+//        // Validate inputs
+//        if (nume == null || nume.trim().isEmpty()) {
+//            throw new IllegalArgumentException("Angajat name cannot be null or empty");
+//        }
+//
+//        Angajat angajat = new Angajat();
+//        angajat.setNume(nume);
+//        angajat.setSalariu(salariu);
+//        angajat.setSpecializare(specializare);
+//        angajat.setDisponibilitate(disponibilitate);
+//        angajat.setContValidat(contValidat);
+//
+//
+//        // Save the angajat using the repository
+//        return angajatRepository.save(angajat);
+//    }
 
     @Override
     public void deleteById(Long id) {

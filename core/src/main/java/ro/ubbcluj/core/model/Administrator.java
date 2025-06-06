@@ -1,12 +1,10 @@
-package ro.ubbcluj.core.Model;
+package ro.ubbcluj.core.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
@@ -14,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Builder
+@ToString
 public class Administrator extends BaseEntity<Long>{
 
     @Column(name = "nume", nullable = false)
@@ -28,12 +27,16 @@ public class Administrator extends BaseEntity<Long>{
     @OneToMany(mappedBy = "admin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Cerere> cereri= new HashSet<>();
 
-    public Set<Locatar> getLocatari() {
-        cereri = cereri == null ? new HashSet<>() :
-                cereri;
-        return Collections.unmodifiableSet(
-                this.cereri.stream().
-                        map(Cerere::getLocatar).
-                        collect(Collectors.toSet()));
+    public Administrator(Long id) {
+        super(id);
     }
+
+//    public Set<Locatar> getLocatari() {
+//        cereri = cereri == null ? new HashSet<>() :
+//                cereri;
+//        return Collections.unmodifiableSet(
+//                this.cereri.stream().
+//                        map(Cerere::getLocatar).
+//                        collect(Collectors.toSet()));
+//    }
 }
