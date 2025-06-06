@@ -1,6 +1,6 @@
 package ro.ubbcluj.web.converter;
 
-import ro.ubbcluj.core.Model.BaseEntity;
+import ro.ubbcluj.core.model.BaseEntity;
 import ro.ubbcluj.web.dto.BaseDto;
 
 import java.util.Set;

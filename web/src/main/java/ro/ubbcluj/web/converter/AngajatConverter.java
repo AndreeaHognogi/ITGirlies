@@ -3,25 +3,29 @@ package ro.ubbcluj.web.converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import ro.ubbcluj.core.Model.Angajat;
-import ro.ubbcluj.core.Model.Specializare;
+import ro.ubbcluj.core.model.Angajat;
+import ro.ubbcluj.core.model.Cerere;
 import ro.ubbcluj.web.dto.AngajatDto;
 
 @Component
 public class AngajatConverter extends AbstractConverterBaseEntityConverter<Angajat, AngajatDto> {
     private static final Logger log = LoggerFactory.getLogger(AngajatConverter.class);
 
+    private final CerereConverter cerereConverter;
+    public AngajatConverter(CerereConverter cerereConverter) {
+        this.cerereConverter = cerereConverter;
+    }
 
     @Override
     public Angajat convertDtoToModel(AngajatDto angajatDto) {
-       Angajat angajat = Angajat.builder()
-               .nume(angajatDto.getNume())
-               .salariu(angajatDto.getSalariu())
-               .disponibilitate(angajatDto.getDisponibilitate())
-               .contValidat(angajatDto.getContValidat())
-               .specializare(angajatDto.getSpecializare())
-               .build();
-       angajat.setId(angajatDto.getId());
+       Angajat angajat = new Angajat();
+        Cerere cerere = new Cerere();
+        cerere.setId(1L);
+        angajat.setNume(angajatDto.getNume());
+        angajat.setSalariu(angajatDto.getSalariu());
+        angajat.setDisponibilitate(angajatDto.getDisponibilitate());
+        angajat.setContValidat(angajatDto.getContValidat());
+        angajat.setSpecializare(angajatDto.getSpecializare());
         return angajat;
     }
 
@@ -38,8 +42,3 @@ public class AngajatConverter extends AbstractConverterBaseEntityConverter<Angaj
         return angajatDto;
     }
 }
-//private String nume;
-//private Integer salariu;
-//private Specializare specializare;
-//private Boolean disponibilitate;
-//private Boolean contValidat;

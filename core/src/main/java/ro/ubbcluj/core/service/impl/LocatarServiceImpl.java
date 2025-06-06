@@ -1,15 +1,16 @@
-package ro.ubbcluj.core.Service.Impl;
+package ro.ubbcluj.core.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubbcluj.core.Model.Locatar;
-import ro.ubbcluj.core.Repository.LocatarRepository;
-import ro.ubbcluj.core.Service.LocatarService;
+import ro.ubbcluj.core.model.Locatar;
+import ro.ubbcluj.core.repository.LocatarRepository;
+import ro.ubbcluj.core.service.LocatarService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocatarServiceImpl implements LocatarService {
@@ -25,6 +26,15 @@ public class LocatarServiceImpl implements LocatarService {
         return result;
     }
 
+    @Override
+    public Optional<Locatar> findById(Long id) {
+        log.info("findById --- method called; locatar={}", id);
+        Optional<Locatar> result = locatarRepository.findById(id);
+        log.info("findById --- method completed; result={}", result);
+        return result;
+    }
+
+    @Transactional
     @Override
     public Locatar addLocatar(Locatar locatar) {
         log.trace("addLocatar --- method called; locatar={}", locatar);

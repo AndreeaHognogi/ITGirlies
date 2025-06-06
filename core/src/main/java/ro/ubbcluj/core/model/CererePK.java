@@ -1,6 +1,5 @@
-package ro.ubbcluj.core.Model;
+package ro.ubbcluj.core.model;
 
-import jakarta.persistence.Entity;
 import lombok.*;
 
 import java.io.Serializable;

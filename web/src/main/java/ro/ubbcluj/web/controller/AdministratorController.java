@@ -3,10 +3,12 @@ package ro.ubbcluj.web.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ro.ubbcluj.core.Model.Administrator;
-import ro.ubbcluj.core.Service.AdminService;
+import org.springframework.web.server.ResponseStatusException;
+import ro.ubbcluj.core.model.Administrator;
+import ro.ubbcluj.core.service.AdminService;
 import ro.ubbcluj.web.converter.AdministratorConverter;
 import ro.ubbcluj.web.dto.AdministratorDto;
 
@@ -36,13 +38,29 @@ public class AdministratorController {
         return new ArrayList<>(administratorConverter.convertModelsToDtos(administrators));
     }
 
+
+    @RequestMapping(value = "/administrators/{administratorId}", method = RequestMethod.GET)
+    public AdministratorDto getAdministratorById(@PathVariable("administratorId") final Long adminId) {
+        log.trace("getAdminById");
+        Administrator administrator = administratorService.findById(adminId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Angajat not found"));
+        log.trace("getAdminById: angajat={}", administrator);
+        return administratorConverter.convertModelToDto(administrator);
+    }
+
     @RequestMapping(value = "/administrators/{administratorId}", method = RequestMethod.PUT)
     public AdministratorDto updateAdministrator(
-            @PathVariable final Long administratorId,
+            @PathVariable("administratorId") final Long administratorId,
             @RequestBody final AdministratorDto administratorDto) {
         log.trace("updateAdministrator: administratorId={}, administratorDtoMap={}", administratorId, administratorDto);
 
-        throw new RuntimeException("not yet implemented");
+        Administrator tempAdmin = new Administrator();
+        tempAdmin.setId(administratorId);
+        tempAdmin.setNume(administratorDto.getNume());
+        tempAdmin.setPhone(administratorDto.getPhone());
+        tempAdmin.setEmail(administratorDto.getEmail());
+        return administratorConverter.convertModelToDto(
+                administratorService.updateAdmin(tempAdmin));
+
     }
 
     @RequestMapping(value = "/administrators", method = RequestMethod.POST)
@@ -54,7 +72,8 @@ public class AdministratorController {
         }
 
         // Call the service layer to save the administrator
-        Administrator administrator = administratorService.createAdministrator(administratorDto.getNume(),administratorDto.getPhone(), administratorDto.getEmail() );
+        Administrator administrator = administratorService.createAdministrator(
+                administratorDto.getNume(),administratorDto.getPhone(), administratorDto.getEmail() );
 
         AdministratorDto savedAdministrator = administratorConverter.convertModelToDto(administrator);
         // Return the saved administrator with its generated ID
@@ -62,9 +81,14 @@ public class AdministratorController {
     }
 
     @RequestMapping(value = "administrators/{administratorId}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteAdministrator(@PathVariable final Long administratorId) {
-        log.trace("deleteAdministrator: administratorId={}", administratorId);
-
-        throw new RuntimeException("not yet implemented");
+    public ResponseEntity<?> deleteAdministrator(@PathVariable("administratorId") final Long adminId) {
+        log.warn("deleteAdmin: administratorId: {}", adminId);
+        try{
+            administratorService.deleteById(adminId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Error error) {
+            log.warn("Something went wrong while deleting admin: {}", error);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 }

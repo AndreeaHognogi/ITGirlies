@@ -1,14 +1,16 @@
-package ro.ubbcluj.core.Service.Impl;
+package ro.ubbcluj.core.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ro.ubbcluj.core.Model.Cerere;
-import ro.ubbcluj.core.Repository.CerereRepository;
-import ro.ubbcluj.core.Service.CerereService;
+import org.springframework.transaction.annotation.Transactional;
+import ro.ubbcluj.core.model.Cerere;
+import ro.ubbcluj.core.repository.CerereRepository;
+import ro.ubbcluj.core.service.CerereService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CerereServiceImpl implements CerereService {
@@ -30,6 +32,16 @@ public class CerereServiceImpl implements CerereService {
     }
 
     @Override
+    public Optional<Cerere> findById(Long id) {
+
+//        log.info("findById --- method called; cerere = {}", id);
+//        List<Cerere> result = cerereRepository.findAll();
+//        log.trace("findById: result={}", result);
+        return Optional.empty();
+    }
+
+    @Transactional
+    @Override
     public Cerere addCerere(Cerere cerere) {
         log.trace("addCerere: cerere={}", cerere);
 
@@ -40,6 +52,7 @@ public class CerereServiceImpl implements CerereService {
         return result;
     }
 
+    @Transactional
     @Override
     public Cerere updateCerere(Long id, Cerere cerere) {
         return null;

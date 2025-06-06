@@ -1,4 +1,4 @@
-package ro.ubbcluj.web.Config;
+package ro.ubbcluj.web.config;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;

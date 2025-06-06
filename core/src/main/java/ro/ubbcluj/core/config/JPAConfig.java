@@ -1,4 +1,4 @@
-package ro.ubbcluj.core.Config;
+package ro.ubbcluj.core.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -21,7 +21,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories({"ro.ubbcluj.core.repository"})
 @EnableTransactionManagement
-//@EnableCaching
 public class JPAConfig {
 
     @Value("${db.jdbcUrl}")
@@ -55,17 +54,6 @@ public class JPAConfig {
         return dataSource;
     }
 
-//    @Bean
-//    DataSource dataSource() {
-//        BasicDataSource dataSource=new BasicDataSource();
-//        dataSource.setDriverClassName(Driver.class.getName());
-//        dataSource.setUrl(jdbcUrl);
-//        dataSource.setUsername(username);
-//        dataSource.setPassword(password);
-//        dataSource.setInitialSize(2);
-//
-//        return dataSource;
-//    }
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {

@@ -1,4 +1,4 @@
-package ro.ubbcluj.core.Model;
+package ro.ubbcluj.core.model;
 
 public enum Specializare {
     Electrician,

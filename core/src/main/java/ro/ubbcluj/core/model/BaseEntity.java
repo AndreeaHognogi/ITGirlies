@@ -1,4 +1,4 @@
-package ro.ubbcluj.core.Model;
+package ro.ubbcluj.core.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,13 +7,18 @@ import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 @MappedSuperclass
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "tab")
     private ID id;
+
+    public BaseEntity() {}
+
+    public BaseEntity(ID id) {
+        this.id = id;
+    }
 
     public ID getId() {
         return id;

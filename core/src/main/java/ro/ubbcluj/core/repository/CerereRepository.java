@@ -1,8 +1,7 @@
-package ro.ubbcluj.core.Repository;
+package ro.ubbcluj.core.repository;
 
-import jakarta.persistence.Id;
 import org.springframework.data.jpa.repository.JpaRepository;
-import ro.ubbcluj.core.Model.BaseEntity;
+import ro.ubbcluj.core.model.BaseEntity;
 
 import java.io.Serializable;
 

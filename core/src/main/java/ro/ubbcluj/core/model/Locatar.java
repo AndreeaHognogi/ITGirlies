@@ -1,23 +1,19 @@
-package ro.ubbcluj.core.Model;
+package ro.ubbcluj.core.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Builder
 public class Locatar extends BaseEntity<Long> {
-//    private String nume;
-//    private Integer numarCamera;
-//    private Boolean contValidat;
 
     @Column(name = "nume", nullable = false)
     private String nume;
@@ -29,18 +25,17 @@ public class Locatar extends BaseEntity<Long> {
     private Boolean contValidat;
 
     @OneToMany(mappedBy = "locatar", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
     private Set<Cerere> cerere = new HashSet<>();
 
-    public Set<Locatar> getLocatari() {
-        return Collections.unmodifiableSet(
-                cerere.stream()
-                        .map(Cerere::getLocatar)
-                        .collect(Collectors.toSet())
-        );
 
-//    public Locatar(Locatar locatar) {
-//        super();
-//    }
+    public Locatar(Long id) {
+        super(id);
     }
+//    public Set<Locatar> getLocatari() {
+//        return Collections.unmodifiableSet(
+//                cerere.stream()
+//                        .map(Cerere::getLocatar)
+//                        .collect(Collectors.toSet())
+//        );
+
 }

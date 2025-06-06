@@ -2,13 +2,11 @@ package ro.ubbcluj.web.converter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
-import ro.ubbcluj.core.Model.Angajat;
-import ro.ubbcluj.core.Model.Cerere;
-import ro.ubbcluj.core.Model.Locatar;
+import org.springframework.stereotype.Component;
+import ro.ubbcluj.core.model.Cerere;
 import ro.ubbcluj.web.dto.CerereDto;
 
-@ComponentScan
+@Component
 public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
 
     private static final Logger log = LoggerFactory.getLogger(CerereConverter.class);
@@ -19,7 +17,7 @@ public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
             .locatar(cerereDto.getLocatar())
             .angajat(cerereDto.getAngajat())
             .problema(cerereDto.getProblema())
-            .categorie(cerereDto.getCategorie())
+          //  .categorie(cerereDto.getCategorie())
             .status(cerereDto.getStatus())
             .build();
     return cerere;
@@ -31,15 +29,9 @@ public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
                 .locatar(cerere.getLocatar())
                 .angajat(cerere.getAngajat())
                 .problema(cerere.getProblema())
-                .categorie(cerere.getCategorie())
+             //   .categorie(cerere.getCategorie())
                 .status(cerere.getStatus())
                 .build();
     return cerereDto;}
 }
-
-//private Long locatarId;
-//private Long angajatId;
-//private String problema;
-//private String tipCategorie;
-//private Boolean status;
 
