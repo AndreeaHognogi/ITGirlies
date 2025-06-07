@@ -1,9 +1,8 @@
 package ro.ubbcluj.web.dto;
 
 import lombok.*;
-import ro.ubbcluj.core.model.Angajat;
-import ro.ubbcluj.core.model.Locatar;
-import ro.ubbcluj.core.model.Specializare;
+import ro.ubbcluj.core.model.Status;
+import java.time.LocalDate;
 
 
 @NoArgsConstructor
@@ -12,11 +11,10 @@ import ro.ubbcluj.core.model.Specializare;
 @Setter
 @ToString
 @Builder
-public class CerereDto {
-    private Locatar locatar;
-    private Angajat angajat;
-    private String problema;
-    private Specializare categorie;
-    private Boolean status;
+public class CerereDto extends BaseDto{
+    private String subiect;
+    private String descriere;
+    private LocalDate data;
+    private Status status;
 
 }
