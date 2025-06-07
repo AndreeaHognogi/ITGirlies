@@ -3,36 +3,31 @@ package ro.ubbcluj.core.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Entity
-@IdClass(CererePK.class)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
 @ToString
-@Table(name = "cerere")
 public class Cerere extends BaseEntity<Long> {
-    @Id
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "locatar_id")
-    private Locatar locatar;
 
-    @Id
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "angajat_id")
-    private Angajat angajat;
+    @Column(name = "subiect")
+    private String subiect;
 
-    @Column(name = "problema")
-    private String problema;
+    @Column(name = "descriere")
+    private String descriere;
 
-    @Column(name = "specializare", nullable = false)
+    @Column(name = "data")
+    private LocalDate data;
+
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Specializare specializare;
-
-    @Column(name = "status")
-    private Boolean status;
+    private Status status;
 
     public Cerere(Long id){
         super(id);
