@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubbcluj.core.model.User;
+import ro.ubbcluj.core.repository.UserRepository;
 import ro.ubbcluj.core.service.UserService;
 
 import java.util.List;
@@ -17,12 +18,12 @@ public class UserServiceImpl implements UserService {
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public List<User> findAll() {
         log.trace("findAllUser--- method called");
-        List<User> result = userService.findAll();
+        List<User> result = userRepository.findAll();
         log.trace("findAllUser --- method completed; result={}", result);
         return result;
     }
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findById(Long id) {
         log.info("findById --- method called; user={}", id);
-        Optional<User> result = userService.findById(id);
+        Optional<User> result = userRepository.findById(id);
         log.info("findById --- method completed; result={}", result);
         return result;
     }
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
         log.trace("addUser --- method called; user={}", user);
-        User result = userService.addUser(user);
+        User result = userRepository.save(user);
         log.trace("addUser --- method completed; result={}", result);
         return result;
     }
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) {
         log.trace("updateUser --- method called; user={}", user);
-        User updateUser = userService.findById(user.getId()).orElse(new User());
+        User updateUser = userRepository.findById(user.getId()).orElse(new User());
         updateUser.setUsermane(user.getUsermane());
         updateUser.setPassword(user.getPassword());
         updateUser.setEmail(user.getEmail());
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         log.trace("deleteById --- method called; user={}", id);
-        userService.deleteById(id);
+        userRepository.deleteById(id);
         log.trace("deleteById --- method completed; deleteUsser={}", id);
     }
 }
