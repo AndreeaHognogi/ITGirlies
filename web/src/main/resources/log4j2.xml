@@ -34,7 +34,7 @@
         <Logger name="org.springframework.web" level="TRACE"/>
         <Logger name="org.springframework.http.converter.json" level="WARN"/>
         <Logger name="com.fasterxml.jackson.databind" level="WARN"/>
-        <Logger name="ro.ubb.bookstore" level="TRACE"/>
+        <Logger name="ro.ubbcluj" level="TRACE"/>
 
         <!-- ROOT -->
         <Root level="WARN">

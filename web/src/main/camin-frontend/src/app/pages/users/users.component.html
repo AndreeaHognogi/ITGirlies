@@ -1,0 +1,41 @@
+<div class="top-banner">
+  <div class="banner-text">
+    <h1>
+      CĂMINUL <span>LOREM IPSUM</span><br />
+      BUN VENIT!
+    </h1>
+  </div>
+
+  <div class="banner-logo">
+    <img src="assets/logo.jpg" alt="logo" />
+  </div>
+
+  <div class="logout-btn-container">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Dashboard Admin - Utilizatori</h2>
+  <button class="add-button" (click)="addUser()">Adaugă utilizator</button>
+</div>
+
+<div class="page-content">
+  <div class="request-card" *ngFor="let user of this.users">
+    <div class="card-info"><strong>ID:</strong> {{ user.id }}</div>
+    <div class="card-info"><strong>Username:</strong> {{ user.username }}</div>
+    <div class="card-info"><strong>Email:</strong> {{ user.email }}</div>
+    <div class="card-info"><strong>Rol:</strong> {{ user.role }}</div>
+    <div class="card-info"><strong>Telefon:</strong> {{ user.phone }}</div>
+    <div class="card-info"><strong>User Validat:</strong> {{ user.validated }}</div>
+    <div class="card-actions">
+      <div *ngIf="!user.validated">
+        <button class="accept-button" (click)="validateUser(user.id, user)">Valideaza</button>
+      </div>
+      <button class="accept-button" (click)="editUser(user.id)">Editează</button>
+      <button class="decline-button" (click)="deleteUser(user.id)">Șterge</button>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-banner">© IT GIRLIES 2025</div>

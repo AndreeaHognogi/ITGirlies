@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.core.repository.UserRepository;
 import ro.ubbcluj.core.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,6 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAll() {
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
         log.trace("addUser --- method called; user={}", user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User result = userRepository.save(user);
         log.trace("addUser --- method completed; result={}", result);
         return result;
@@ -50,12 +55,21 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         log.trace("updateUser --- method called; user={}", user);
         User updateUser = userRepository.findById(user.getId()).orElse(new User());
+        log.trace("updatedUser - {}", updateUser);
+        updateUser.setFirstname(user.getFirstname());
+        updateUser.setLastname(user.getLastname());
         updateUser.setUsermane(user.getUsermane());
-        updateUser.setPassword(user.getPassword());
         updateUser.setEmail(user.getEmail());
         updateUser.setPhone(user.getPhone());
         updateUser.setRole(user.getRole());
+        log.trace("A venit {} si trebuie sa devina {}", user.getValidated(), updateUser.getValidated());
         updateUser.setValidated(user.getValidated());
+
+        // daca parola e deja encodata si aceeasi, nu o schimba
+        if (!Objects.equals(updateUser.getPassword(), user.getPassword())) {
+            updateUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
         return updateUser;
     }
 

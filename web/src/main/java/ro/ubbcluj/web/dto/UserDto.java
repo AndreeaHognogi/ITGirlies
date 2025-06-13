@@ -2,7 +2,6 @@ package ro.ubbcluj.web.dto;
 
 import lombok.*;
 import ro.ubbcluj.core.model.Role;
-import ro.ubbcluj.core.model.User;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,8 +14,8 @@ public class UserDto extends BaseDto{
     private String password;
     private String email;
     private String phone;
-    private boolean validate;
+    private String firstname;
+    private String lastname;
+    private boolean validated;
     private Role role;
-
-
 }

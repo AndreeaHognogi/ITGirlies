@@ -9,7 +9,11 @@
   <div class="login-box">
     <img src="assets/logo.jpg" alt="logo" class="logo" />
 
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+
       <div class="form-group">
         <i class="fa fa-user icon"></i>
         <input
@@ -35,8 +39,8 @@
       <button type="submit" [disabled]="!loginForm.form.valid">LOGIN</button>
 
       <div class="links">
-        <a href="#">Recuperare parolă</a>
-        <a href="#">Înregistrare</a>
+        <a href="recover">Recuperare parolă</a>
+        <a href="register">Înregistrare</a>
       </div>
     </form>
   </div>
