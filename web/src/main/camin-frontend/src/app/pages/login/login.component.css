@@ -125,3 +125,13 @@ button {
   font-size: 12px;
   color: #002b5c;
 }
+
+.error-message {
+  background-color: #ffe5e5;
+  color: #c20000;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}

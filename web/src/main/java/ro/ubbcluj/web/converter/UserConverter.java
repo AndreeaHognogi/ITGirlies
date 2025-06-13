@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ro.ubbcluj.core.model.Cerere;
 import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.web.dto.UserDto;
 
@@ -20,27 +19,29 @@ public class UserConverter extends AbstractConverterBaseEntityConverter<User, Us
     }
     @Override
     public User convertDtoToModel(UserDto userDto) {
-        Cerere cerere = new Cerere();
-        cerere.setId(1L);
         User user = new User();
+        user.setLastname(userDto.getLastname());
+        user.setFirstname(userDto.getFirstname());
         user.setUsermane(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
         user.setPhone(userDto.getPhone());
         user.setRole(userDto.getRole());
-        user.setValidated(false);
+        user.setValidated(userDto.isValidated());
         return user;
     }
 
     @Override
     public UserDto convertModelToDto(User user) {
         UserDto userDto = UserDto.builder()
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
                 .username(user.getUsermane())
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .phone(user.getPhone())
                 .role(user.getRole())
-                .validate(false)
+                .validated(user.getValidated())
                 .build();
         userDto.setId(user.getId());
         return userDto;

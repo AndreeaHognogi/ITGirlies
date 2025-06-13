@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ro.ubbcluj.core.model.User;
-import ro.ubbcluj.core.repository.UserRepository;
 import ro.ubbcluj.core.service.UserService;
-import ro.ubbcluj.core.service.impl.UserServiceImpl;
 import ro.ubbcluj.web.converter.UserConverter;
 import ro.ubbcluj.web.dto.UserDto;
 
@@ -23,8 +21,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     UserConverter userConverter;
@@ -32,7 +28,7 @@ public class UserController {
     @RequestMapping(value= "/users", method = RequestMethod.GET)
     public List<UserDto> getUsers() {
         log.trace("getUsers");
-        List<User> users = userRepository.findAll();
+        List<User> users = userService.findAll();
         log.trace("getUsers: users: {}", users);
         return  new ArrayList<>(userConverter.convertModelsToDtos(users));
     }
@@ -60,12 +56,14 @@ public class UserController {
         log.trace("updateUser: userDto: {}", userDto);
         User tempUser = new User();
         tempUser.setId(userId);
+        tempUser.setFirstname(userDto.getFirstname());
+        tempUser.setLastname(userDto.getLastname());
         tempUser.setUsermane(userDto.getUsername());
         tempUser.setPassword(userDto.getPassword());
         tempUser.setEmail(userDto.getEmail());
         tempUser.setPhone(userDto.getPhone());
         tempUser.setRole(userDto.getRole());
-        tempUser.setValidated(false);
+        tempUser.setValidated(userDto.isValidated());
         return userConverter.convertModelToDto(
                 userService.updateUser(tempUser));
     }

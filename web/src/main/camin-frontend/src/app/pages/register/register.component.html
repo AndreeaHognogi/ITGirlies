@@ -1,0 +1,111 @@
+<div class="top-banner">
+  <h1>
+    CĂMINUL <span>LOREM IPSUM</span><br />
+    BUN VENIT!
+  </h1>
+</div>
+
+<div class="login-wrapper">
+  <div class="login-box">
+    <img src="assets/logo.jpg" alt="logo" class="logo" />
+
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <!-- First Name -->
+      <div class="form-group">
+        <i class="fa fa-user icon"></i>
+        <input
+          type="text"
+          placeholder="Prenume"
+          name="firstname"
+          [(ngModel)]="firstname"
+          required
+        />
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <i class="fa fa-user icon"></i>
+        <input
+          type="text"
+          placeholder="Nume"
+          name="lastname"
+          [(ngModel)]="lastname"
+          required
+        />
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <i class="fa fa-user icon"></i>
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          [(ngModel)]="username"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <i class="fa fa-envelope icon"></i>
+        <input
+          type="text"
+          placeholder="Email"
+          name="email"
+          [(ngModel)]="email"
+          required
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <i class="fa fa-phone icon"></i>
+        <input
+          type="text"
+          placeholder="Telefon"
+          name="phone"
+          [(ngModel)]="phone"
+          required
+        />
+      </div>
+
+      <!-- Role -->
+      <div class="form-group">
+        <i class="fa fa-id-badge icon"></i>
+        <select name="role" [(ngModel)]="role" required>
+          <option value="" disabled selected>Selectează rolul</option>
+          <option value="Admin">Admin</option>
+          <option value="Angajat">Angajat</option>
+          <option value="Locatar">Locatar</option>
+        </select>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <i class="fa fa-lock icon"></i>
+        <input
+          type="password"
+          placeholder="Parolă"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" [disabled]="!registerForm.form.valid">
+        ÎNREGISTRARE
+      </button>
+
+      <div class="links">
+        <a href="#">Recuperare parolă</a>
+        <a href="#">Înregistrare</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="bottom-banner">
+  © IT GIRLIES 2025
+</div>

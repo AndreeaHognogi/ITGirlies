@@ -1,0 +1,30 @@
+.unauthorized-container {
+  text-align: center;
+  margin-top: 10vh;
+  padding: 20px;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.unauthorized-container h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  color: #d9534f;
+}
+
+.unauthorized-container p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.back-home {
+  padding: 10px 20px;
+  background-color: #002b5c;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.back-home:hover {
+  background-color: #004080;
+}
