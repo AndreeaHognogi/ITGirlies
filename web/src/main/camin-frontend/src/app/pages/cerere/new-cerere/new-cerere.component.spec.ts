@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {RegisterComponent} from './register.component';
 
+import { NewCerereComponent } from './new-cerere.component';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+describe('NewCerereComponent', () => {
+  let component: NewCerereComponent;
+  let fixture: ComponentFixture<NewCerereComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterComponent]
+      imports: [NewCerereComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(NewCerereComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

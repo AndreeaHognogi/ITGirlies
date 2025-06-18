@@ -32,4 +32,8 @@ public class Cerere extends BaseEntity<Long> {
     public Cerere(Long id){
         super(id);
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; // Locatarul care a trimis cererea
 }

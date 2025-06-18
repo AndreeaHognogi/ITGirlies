@@ -11,29 +11,54 @@
   </div>
 
   <div class="logout-btn-container">
-    <button class="logout-btn">Logout</button>
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 </div>
 
 
-
-<div class="form-wrapper">
-  <form (ngSubmit)="onSubmit()" #cerereForm="ngForm">
-    <label>Introduceți numele*</label>
-    <input type="text" [(ngModel)]="nume" name="nume" required />
-
-    <label>Introduceți nr. camerei*</label>
-    <input type="text" [(ngModel)]="camera" name="camera" required />
-
-    <label>Specializare*</label>
-    <input type="text" [(ngModel)]="specializare" name="specializare" required />
-
-    <label>Descrieți problema*</label>
-    <textarea [(ngModel)]="problema" name="problema" required></textarea>
-
-    <button type="submit" [disabled]="!cerereForm.form.valid">TRIMITEȚI</button>
-  </form>
+<div class="page-header">
+  <h2>Dashboard Admin - Cereri </h2>
+  <button class="add-button" (click)="addCerere()">Adaugă cerere</button>
 </div>
+
+<div class="page-content">
+  <div class="request-card" *ngFor="let cerere of this.cereri">
+    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>
+    <div class="card-info"><strong>Subiect:</strong> {{cerere.subiect}}</div>
+    <div class="card-info"><strong>Descriere:</strong> {{cerere.descriere }}</div>
+    <div class="card-info"><strong>Data:</strong> {{ cerere.data }}</div>
+    <div class="card-info"><strong>Status:</strong> {{ cerere.status }}</div>
+<!--    <div class="card-info"><strong>User Validat:</strong> {{ user.validated }}</div>-->
+    <div class="card-actions">
+<!--      <div *ngIf="!cerere.validated">-->
+<!--        <button class="accept-button" (click)="validateUser(user.id, user)">Valideaza</button>-->
+<!--      </div>-->
+      <button class="accept-button" (click)="editCerere(cerere.id)">Editează</button>
+      <button class="decline-button" (click)="deleteCerere(cerere.id)">Șterge</button>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-banner">© IT GIRLIES 2025</div>
+
+
+<!--<div class="form-wrapper">-->
+<!--  <form (ngSubmit)="onSubmit()" #cerereForm="ngForm">-->
+<!--    <label>Introduceți numele*</label>-->
+<!--    <input type="text" [(ngModel)]="nume" name="nume" required />-->
+
+<!--    <label>Introduceți nr. camerei*</label>-->
+<!--    <input type="text" [(ngModel)]="camera" name="camera" required />-->
+
+<!--    <label>Specializare*</label>-->
+<!--    <input type="text" [(ngModel)]="specializare" name="specializare" required />-->
+
+<!--    <label>Descrieți problema*</label>-->
+<!--    <textarea [(ngModel)]="problema" name="problema" required></textarea>-->
+
+<!--    <button type="submit" [disabled]="!cerereForm.form.valid">TRIMITEȚI</button>-->
+<!--  </form>-->
+<!--</div>-->
 
 <div class="bottom-banner">
   © IT GIRLIES 2025

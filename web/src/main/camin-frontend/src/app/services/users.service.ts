@@ -8,7 +8,7 @@ import { SERVER_API_URL } from '../constants';
 })
 export class UsersService {
   users:{
-    id: string,
+    id: number,
     username: string,
     firstname: string,
     lastname: string,

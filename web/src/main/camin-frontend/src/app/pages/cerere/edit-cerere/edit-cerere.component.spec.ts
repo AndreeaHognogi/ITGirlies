@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {RegisterComponent} from './register.component';
 
+import { EditCerereComponent } from './edit-cerere.component';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+describe('EditCerereComponent', () => {
+  let component: EditCerereComponent;
+  let fixture: ComponentFixture<EditCerereComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterComponent]
+      imports: [EditCerereComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(EditCerereComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
