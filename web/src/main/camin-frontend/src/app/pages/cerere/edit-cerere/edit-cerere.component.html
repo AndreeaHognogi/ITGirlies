@@ -1,0 +1,68 @@
+<div class="top-banner">
+  <div class="banner-text">
+    <h1>
+      CĂMINUL <span>LOREM IPSUM</span><br />
+      BUN VENIT!
+    </h1>
+  </div>
+
+  <div class="banner-logo">
+    <img src="assets/logo.jpg" alt="logo" />
+  </div>
+
+  <div class="logout-btn-container">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Editează Cererea</h2>
+</div>
+
+<div class="page-content">
+  <form #editForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Subiect:</label>
+      <input
+        type="text"
+        name="subiect"
+        [(ngModel)]="cerere.subiect"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Descriere:</label>
+      <input
+        type="text"
+        name="descriere"
+        [(ngModel)]="cerere.descriere"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Data:</label>
+      <input
+        type="text"
+        name="data"
+        [(ngModel)]="cerere.data"
+        required
+      />
+    </div>
+
+<!--    <div class="form-group">-->
+<!--      <label>Rol:</label>-->
+<!--      <select name="role" [(ngModel)]="user.role" required>-->
+<!--        <option value="Admin">Admin</option>-->
+<!--        <option value="Angajat">Angajat</option>-->
+<!--        <option value="Locatar">Locatar</option>-->
+<!--      </select>-->
+<!--    </div>-->
+
+
+    <button type="submit" [disabled]="!editForm.form.valid">Salvează</button>
+  </form>
+</div>
+
+<div class="bottom-banner">© IT GIRLIES 2025</div>

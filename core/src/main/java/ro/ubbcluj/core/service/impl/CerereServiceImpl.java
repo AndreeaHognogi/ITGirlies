@@ -1,15 +1,19 @@
 package ro.ubbcluj.core.service.impl;
 
+import org.hibernate.usertype.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubbcluj.core.model.Cerere;
+import ro.ubbcluj.core.model.Role;
+import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.core.repository.CerereRepository;
 import ro.ubbcluj.core.service.CerereService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -33,10 +37,9 @@ public class CerereServiceImpl implements CerereService {
 
     @Override
     public Optional<Cerere> findById(Long id) {
-
-//        log.info("findById --- method called; cerere = {}", id);
-//        List<Cerere> result = cerereRepository.findAll();
-//        log.trace("findById: result={}", result);
+        log.info("findById --- method called; cerere = {}", id);
+       Optional<Cerere> result = cerereRepository.findById(id);
+       log.trace("findById: result={}", result);
         return Optional.empty();
     }
 
@@ -54,26 +57,20 @@ public class CerereServiceImpl implements CerereService {
 
     @Transactional
     @Override
-    public Cerere updateCerere(Long id, Cerere cerere) {
-        return null;
+    public Cerere updateCerere(Cerere cerere) {
+        log.trace("updateCerere --- method calle; cerere={}", cerere);
+//        Cerere updateCerere = cerereRepository.findById(cerere.getId())
+//                .orElseThrow(() -> new IllegalArgumentException("Cererea nu exista!"));
+       Cerere updateCerere = (Cerere) cerereRepository.findById(cerere.getId()).orElse(new Cerere());
+        log.trace("updateCerere: cerere={}", cerere);
+        updateCerere.setSubiect(cerere.getSubiect());
+        updateCerere.setDescriere(cerere.getDescriere());
+        updateCerere.setData(cerere.getData());
+        updateCerere.setStatus(cerere.getStatus());
+        updateCerere.setUser(cerere.getUser());
+        updateCerere = (Cerere) cerereRepository.save(updateCerere);
+        return updateCerere;
     }
-
-//    @Override
-//    public Cerere updateCerere(Long id, Cerere cerere) {
-//        log.trace("updateCerere: cerere={}", cerere);
-//
-//        Cerere result = cerereRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Cererea cu ID " + id + " nu exista!"));
-//        result.setAngajat(cerere.getAngajat());
-//        result.setStatus(cerere.getStatus());
-//        result.setCategorie(cerere.getCategorie());
-//        result.setLocatar(cerere.getLocatar());
-//        result.setProblema(cerere.getProblema());
-//        result = (Cerere) cerereRepository.save(result);
-//        log.trace("updateCerere: result={}", result);
-//        return result;
-//        //metoda aceasta nu sunt sigura ca e buna
-//    }
 
     @Override
     public void deleteById(Long id) {
@@ -81,4 +78,9 @@ public class CerereServiceImpl implements CerereService {
         cerereRepository.deleteById(id);
         log.trace("deleteOrder: result={}", id);
     }
+
+    public List<Cerere> findByRole(Role role) {
+        return cerereRepository.findByUserRole(role);
+    }
+
 }

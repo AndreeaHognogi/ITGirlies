@@ -21,6 +21,7 @@ public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
             .descriere(cerereDto.getDescriere())
             .data(cerereDto.getData())
             .status(cerereDto.getStatus())
+            .user(cerereDto.getUser())
             .build();
         return cerere;
     }
@@ -32,13 +33,10 @@ public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
                 .descriere(cerere.getDescriere())
                 .data(cerere.getData())
                 .status(cerere.getStatus())
+                .user(cerere.getUser())
                 .build();
 
     return cerereDto;
     }
 }
 
-//private String subiect;
-//private String descriere;
-//private LocalDate data;
-//private Status status;

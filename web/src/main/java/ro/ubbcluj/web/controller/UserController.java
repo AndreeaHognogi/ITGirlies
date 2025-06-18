@@ -75,7 +75,7 @@ public class UserController {
             userService.deleteById(userId);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Error error) {
-            log.warn("Something went wrong while deleting locatar: {}", error);
+            log.warn("Something went wrong while deleting user: {}", error);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
