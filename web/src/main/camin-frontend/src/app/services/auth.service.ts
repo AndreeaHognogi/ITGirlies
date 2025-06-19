@@ -35,7 +35,7 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     return this.http.post<{ token: string }>(`${SERVER_API_URL}/auth/login`, { email, password }).pipe(
       tap(response => {
-        console.log("am primit raspunsul", response);
+        console.log("Am primit raspunsul", response);
         localStorage.setItem('authToken', response.token);
       })
     );
@@ -49,13 +49,29 @@ export class AuthService {
     return this.http.post(`${SERVER_API_URL}/recover-password`, { email });
   }
 
-  getDecodedToken(): Object {
-    try {
-      return jwtDecode(localStorage.getItem('authToken') || '') || {};
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+  // getDecodedToken(): Object {
+  //   try {
+  //     return jwtDecode(localStorage.getItem('authToken') || '') || {};
+  //   }
+  //   catch (e) {
+  //     console.log("Nu ai token!")
+  //     return {}
+  //   }
+  // }
+  getDecodedToken(): any {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.log('Tokenul nu există.');
+      return null;
     }
-    catch (e) {
-      console.log("Nu ai token!")
-      return {}
+    try {
+      return jwtDecode(token);
+    } catch (e) {
+      console.error('Token invalid sau expirat!', e);
+      return null;
     }
   }
 }

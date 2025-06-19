@@ -11,21 +11,21 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./dashboard-angajat.component.css']
 })
 export class DashboardAngajatComponent {
-  cereri = [
-    { id: 1, camera: 101, descriere: '...' },
-    { id: 2, camera: 105, descriere: '...' },
-    { id: 3, camera: 130, descriere: '...' }
-  ];
+  // cereri = [
+  //   { id: 1, camera: 101, descriere: '...' },
+  //   { id: 2, camera: 105, descriere: '...' },
+  //   { id: 3, camera: 130, descriere: '...' }
+  // ];
 
   constructor(private authService: AuthService, private router: Router) {}
-
-  preiaCerere(id: number) {
-    console.log(`Cererea ${id} a fost preluată.`);
-  }
-
-  stergeCerere(id: number) {
-    this.cereri = this.cereri.filter(cerere => cerere.id !== id);
-  }
+  //
+  // preiaCerere(id: number) {
+  //   console.log(`Cererea ${id} a fost preluată.`);
+  // }
+  //
+  // stergeCerere(id: number) {
+  //   this.cereri = this.cereri.filter(cerere => cerere.id !== id);
+  // }
 
   logout() {
     this.authService.logout();

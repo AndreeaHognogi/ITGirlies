@@ -1,8 +1,21 @@
 import { Routes } from '@angular/router';
 import { roleGuard } from './auth/role.guard';
 import { UnauthorizedPageComponent } from './pages/unauthorized-page/unauthorized-page.component';
+import {LoginComponent} from './pages/login/login.component';
+import {RegisterComponent} from './pages/register/register.component';
+import {CereriComponent} from './pages/cereri/cereri.component';
+import {DashboardLocatarComponent} from './pages/dashboard-locatar/dashboard-locatar.component';
+import {DashboardAngajatComponent} from './pages/dashboard-angajat/dashboard-angajat.component';
 
 export const routes: Routes = [
+
+  // { path: 'login', component: LoginComponent },
+  // { path: 'register', component: RegisterComponent },
+  // { path: 'cereri', component: CereriComponent },
+  // { path: 'locatar', component: DashboardLocatarComponent},
+  // { path: 'angajat', component: DashboardAngajatComponent},
+  // // fallback
+  // { path: '**', redirectTo: 'login' },
   {
     path: 'login',
     loadComponent: () =>
@@ -15,10 +28,24 @@ export const routes: Routes = [
   },
   {
     canActivate: [roleGuard],
-    data: { expectedRole: 'Locatar' },
-    path: 'cerere',
+    data: { expectedRole: 'Admin' },
+    path: 'cereri',
     loadComponent: () =>
-      import('./pages/cerere/cerere.component').then(m => m.CerereComponent)
+      import('./pages/cereri/cereri.component').then(m => m.CereriComponent)
+  },
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Admin' },
+    path: 'cereri/new',
+    loadComponent: () =>
+      import('./pages/cereri/new-cerere/new-cerere.component').then(m => m.NewCerereComponent)
+  },
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Admin' },
+    path: 'cereri/:id',
+    loadComponent: () =>
+      import('./pages/cereri/edit-cerere/edit-cerere.component').then(m => m.EditCerereComponent)
   },
   {
     canActivate: [roleGuard],
@@ -51,7 +78,7 @@ export const routes: Routes = [
   {
     canActivate: [roleGuard],
     data: { expectedRole: 'Angajat' },
-    path: 'dashboard-angajat',
+    path: 'dashboard-angajat/cereri',
     loadComponent: () =>
       import('./pages/dashboard-angajat/dashboard-angajat.component').then(m => m.DashboardAngajatComponent)
   },

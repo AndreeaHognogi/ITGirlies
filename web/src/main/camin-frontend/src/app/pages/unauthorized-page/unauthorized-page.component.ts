@@ -32,7 +32,7 @@ export class UnauthorizedPageComponent {
   redirectToDashboard() {
     const tokenInfo = this.authService.getDecodedToken();
 
-    console.log("ce e eaici", tokenInfo)
+    console.log("ce e aici", tokenInfo)
     // @ts-ignore
     this.navigateBasedOnRole(tokenInfo?.role || "");
   }

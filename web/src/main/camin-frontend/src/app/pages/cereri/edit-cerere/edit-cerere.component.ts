@@ -1,16 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
-import {UsersService} from '../../../services/users.service';
-import {CerereComponent} from '../cerere.component';
 import {CereriService} from '../../../services/cereri.service';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-edit-cerere',
-  imports: [
-    FormsModule
-  ],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './edit-cerere.component.html',
   styleUrl: './edit-cerere.component.css'
 })
@@ -35,7 +33,7 @@ export class EditCerereComponent implements OnInit{
     if (cerereId) {
       this.cerereService.getCerereById(cerereId).subscribe((data) => {
         // @ts-ignore
-        this.user = data;
+        this.cerere = data;
       });
     }
   }
