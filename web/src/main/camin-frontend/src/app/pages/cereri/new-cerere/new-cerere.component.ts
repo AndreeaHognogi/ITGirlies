@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from '@angular/common';
 import {UsersService} from '../../../services/users.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CereriService} from '../../../services/cereri.service';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-new-cerere',
@@ -21,11 +22,11 @@ export class NewCerereComponent {
     // user: '',
   };
 
-  constructor(private cerereService: CereriService, private router: Router) {}
-
-  logout() {
-    // implementarea logout-ului
-  }
+  constructor(
+    private authService: AuthService,
+    private cerereService: CereriService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     this.cerereService.addCereri(this.cerere).subscribe(() => {
@@ -33,4 +34,8 @@ export class NewCerereComponent {
     });
   }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login'])
+  }
 }

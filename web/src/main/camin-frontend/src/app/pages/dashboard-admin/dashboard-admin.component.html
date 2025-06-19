@@ -1,43 +1,3 @@
-<!--<div class="top-banner">-->
-<!--  <div class="banner-text">-->
-<!--    <h1>-->
-<!--      CĂMINUL <span>LOREM IPSUM</span><br />-->
-<!--      BUN VENIT!-->
-<!--    </h1>-->
-<!--  </div>-->
-
-<!--  <div class="banner-logo">-->
-<!--    <img src="assets/logo.jpg" alt="logo" />-->
-<!--  </div>-->
-
-<!--  <div class="logout-btn-container">-->
-<!--    <button class="logout-btn">Logout</button>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-
-<!--<div class="page-header">-->
-<!--  <h2>Dashboard Administrator</h2>-->
-<!--</div>-->
-
-<!--<div class="page-content">-->
-<!--  <div class="request-card" *ngFor="let cerere of cereri">-->
-<!--    <div class="card-info">-->
-<!--      <p><strong>Nume:</strong> {{ cerere.nume }}</p>-->
-<!--      <p><strong>Nume utilizator:</strong> {{ cerere.utilizator }}</p>-->
-<!--    </div>-->
-<!--    <div class="card-actions">-->
-<!--      <button class="accept-button">ACCEPTĂ</button>-->
-<!--      <button class="decline-button">REFUZĂ</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="bottom-banner">-->
-<!--  © IT GIRLIES 2025-->
-<!--</div>-->
-
 <div class="top-banner">
   <div class="banner-text">
     <h1>
@@ -51,30 +11,84 @@
   </div>
 
   <div class="logout-btn-container">
-    <a href="/users" class="logout-btn">Editeaza utilizatori</a>
-    <a href="/cereri" class="logout-btn">Editeaza cereri</a>
     <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 </div>
-
 
 <div class="page-header">
   <h2>Dashboard Administrator</h2>
 </div>
 
+
 <div class="page-content">
-  <div class="request-card" *ngFor="let cerere of cereri">
-    <div class="card-info">
-      <p><strong>Nume:</strong> {{ cerere.nume }}</p>
-    </div>
-    <div class="card-info">
-      <p><strong>Nume utilizator:</strong> {{ cerere.utilizator }}</p>
-    </div>
-    <div class="card-actions">
-      <button class="accept-button">ACCEPTĂ</button>
-      <button class="decline-button">REFUZĂ</button>
-    </div>
-  </div>
+  <button class="logout-btn" (click)="goToUsers()">Utilizatori</button>
+  <button class="logout-btn" (click)="goToCereri()">Cereri</button>
+  <button class="logout-btn" (click)="goToLocatarDashboard()">Locatari</button>
+  <button class="logout-btn" (click)="goToAngajatDashboard()">Angajati</button>
 </div>
 
 <div class="bottom-banner">© IT GIRLIES 2025</div>
+<!--<div class="page-content">-->
+<!--  <div class="request-card" *ngFor="let cerere of cereri">-->
+<!--    <div class="card-info">-->
+<!--      <p><strong>Nume:</strong> {{ cerere.nume }}</p>-->
+<!--      <p><strong>Nume utilizator:</strong> {{ cerere.utilizator }}</p>-->
+<!--    </div>-->
+<!--    <div class="card-actions">-->
+<!--      <button class="accept-button">ACCEPTĂ</button>-->
+<!--      <button class="decline-button">REFUZĂ</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<!--  <div class="logout-btn-container">-->
+<!--    <a href="/users" class="logout-btn">Editeaza utilizatori</a>-->
+<!--    <a href="/cereri" class="logout-btn">Editeaza cereri</a>-->
+<!--    <button class="logout-btn" (click)="logout()">Logout</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<!--<h4>Cererile primite</h4>-->
+<!--<div class="page-content">-->
+<!--  <div class="request-card" *ngFor="let cerere of this.cereri">-->
+<!--    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>-->
+<!--    <div class="card-info"><strong>Subiect:</strong> {{cerere.subiect}}</div>-->
+<!--    <div class="card-info"><strong>Descriere:</strong> {{cerere.descriere }}</div>-->
+<!--    <div class="card-info"><strong>Data:</strong> {{ cerere.data }}</div>-->
+<!--    <div class="card-info"><strong>Status cerere:</strong> {{ cerere.status }}</div>-->
+<!--    <div class="card-actions" *ngIf="cerere.status === 'PENDING'">-->
+<!--      <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'ACCEPTED')">-->
+<!--        Acceptă-->
+<!--      </button>-->
+<!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'REJECTED')">-->
+<!--        Refuză-->
+<!--      </button>-->
+<!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'IN_PROGRESS')">-->
+<!--        In progres-->
+<!--      </button>-->
+<!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'DONE')">-->
+<!--        Terminat-->
+<!--      </button>-->
+<!--    </div>-->
+<!--<div class="page-content">-->
+<!--  <div class="request-card" *ngFor="let cerere of cereri">-->
+<!--    <div class="card-info">-->
+<!--      <p><strong>Subiect:</strong> {{ cerere.subiect }}</p>-->
+<!--    </div>-->
+<!--    <div class="card-info">-->
+<!--      <p><strong>Descriere</strong> {{ cerere.descriere}}</p>-->
+<!--    </div>-->
+<!--    <div class="card-actions">-->
+<!--      <button class="accept-button">ACCEPTĂ</button>-->
+<!--      <button class="decline-button">REFUZĂ</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+

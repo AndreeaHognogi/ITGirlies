@@ -1,7 +1,7 @@
-import {SERVER_API_URL} from '../constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
+import {SERVER_API_URL} from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,13 @@ export class CereriService {
   getCerereById(cerereId: string) {
     return this.http.get(`${SERVER_API_URL}/cereri/${cerereId}`);
   }
+  getCereri(): Observable<any> {
+    return this.http.get(`${SERVER_API_URL}/cereri`);
+  }
+
+  addCereri (cerere: any): Observable<any> {
+    return this.http.post(`${SERVER_API_URL}/cereri`, cerere);
+  }
 
   updateCerere(cerereId: any, cerere: any) {
     return this.http.put(`${SERVER_API_URL}/cereri/${cerereId}`, cerere);
@@ -30,12 +37,7 @@ export class CereriService {
     return this.http.delete(`${SERVER_API_URL}/cereri/${cerereId}`);
   }
 
-
-  getCereri(): Observable<any> {
-    return this.http.get(`${SERVER_API_URL}/cereri`);
-  }
-
-  addCereri (cerere: any): Observable<any> {
-    return this.http.post(`${SERVER_API_URL}/cereri`, cerere);
+  getCereriByUser(): Observable<any> {
+    return this.http.get(`${SERVER_API_URL}/cereri/users`);
   }
 }

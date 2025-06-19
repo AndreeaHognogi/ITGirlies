@@ -33,26 +33,29 @@ public class CerereController {
     public List<CerereDto> getCereri() {
         log.trace("getCereri");
         List<Cerere> cereri = cerereService.findAll();
-
         log.trace("getCereri: cereri: {}", cereri);
         return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
+    }
+
+    @RequestMapping(value= "/cereri/users", method = RequestMethod.GET)
+    public List<CerereDto> getCereriForCurrentUser() {
+        return List.of();
     }
 
     @RequestMapping(value = "/cereri/{cerereId}", method = RequestMethod.GET)
     public CerereDto getCerereById(@PathVariable("cerereId") final Long cerereId) {
         log.trace("getCerereById");
         Cerere cerere = cerereService.findById(cerereId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Cerere not found"));
-
         log.trace("getCerereById: cerere: {}", cerere);
         return cerereConverter.convertModelToDto(cerere);
     }
 
     @RequestMapping(value = "/cereri", method = RequestMethod.POST)
-    public CerereDto createCerere(@RequestBody final CerereDto cerereDto) {
+    public CerereDto createCerere(@RequestBody final CerereDto cerereDto,
+                                  @RequestHeader("authorization") String jwt) {
         log.trace("createCerere: cerereDto: {}", cerereDto);
         CerereDto resultCerereDto = cerereConverter.convertModelToDto(
                 cerereService.addCerere(cerereConverter.convertDtoToModel(cerereDto)));
-
         return resultCerereDto;
     }
 

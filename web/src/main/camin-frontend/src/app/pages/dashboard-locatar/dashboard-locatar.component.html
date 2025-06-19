@@ -16,18 +16,20 @@
 </div>
 
 <div class="page-header">
-  <h2>Dashboard Locatar</h2>
+  <h2>Bine ai venit, Locatar!</h2>
 </div>
 
-<div class="page-content">
-  <div class="request-card" *ngFor="let cerere of cereri">
-    <div class="card-info">ID CERERE: {{ cerere.id }}</div>
-    <div class="card-info">SPECIALIZARE: {{ cerere.specializare }}</div>
-    <div class="card-actions">
-      <button class="status-button">STATUS</button>
-      <button class="status-value">{{ cerere.status }}</button>
-    </div>
-  </div>
-</div>
+<a routerLink="/cereri">Adaugă sau vizualizează cereri</a>
+
+<!--<div class="page-content">-->
+<!--  <div class="request-card" *ngFor="let cerere of cereri">-->
+<!--    <div class="card-info">ID Cerere: {{ cerere.id }}</div>-->
+<!--    <div class="card-info">Subiect: {{ cerere.specializare }}</div>-->
+<!--    <div class="card-actions">-->
+<!--      <button class="status-button">STATUS</button>-->
+<!--      <button class="status-value">{{ cerere.status }}</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div class="bottom-banner">© IT GIRLIES 2025</div>

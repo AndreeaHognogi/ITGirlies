@@ -10,20 +10,26 @@ import ro.ubbcluj.web.dto.CerereDto;
 import java.time.LocalDate;
 
 @Component
-public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
+public class CerereConverter extends AbstractConverterBaseEntityConverter<Cerere, CerereDto>{
 
     private static final Logger log = LoggerFactory.getLogger(CerereConverter.class);
 
     @Override
     public Cerere convertDtoToModel(CerereDto cerereDto) {
-    Cerere cerere = Cerere.builder()
-            .subiect(cerereDto.getSubiect())
-            .descriere(cerereDto.getDescriere())
-            .data(cerereDto.getData())
-            .status(cerereDto.getStatus())
-            .user(cerereDto.getUser())
-            .build();
+        Cerere cerere = new Cerere();
+        cerere.setSubiect(cerereDto.getSubiect());
+        cerere.setDescriere(cerereDto.getDescriere());
+        cerere.setData(cerereDto.getData());
+        cerere.setStatus(cerereDto.getStatus());
         return cerere;
+//    Cerere cerere = Cerere.builder()
+//            .subiect(cerereDto.getSubiect())
+//            .descriere(cerereDto.getDescriere())
+//            .data(cerereDto.getData())
+//            .status(cerereDto.getStatus())
+////            .user(cerereDto.getUser())
+//            .build();
+
     }
 
     @Override
@@ -33,7 +39,7 @@ public class CerereConverter extends AbstractConverter<Cerere, CerereDto>{
                 .descriere(cerere.getDescriere())
                 .data(cerere.getData())
                 .status(cerere.getStatus())
-                .user(cerere.getUser())
+//                .user(cerere.getUser())
                 .build();
 
     return cerereDto;
