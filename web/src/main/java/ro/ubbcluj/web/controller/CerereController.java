@@ -16,6 +16,7 @@ import ro.ubbcluj.web.converter.UserConverter;
 import ro.ubbcluj.web.dto.CerereDto;
 import ro.ubbcluj.web.dto.UserDto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class CerereController {
         tempCerere.setId(cerereId);
         tempCerere.setSubiect(cerereDto.getSubiect());
         tempCerere.setDescriere(cerereDto.getDescriere());
-        tempCerere.setData(cerereDto.getData());
+        tempCerere.setData(LocalDate.parse(cerereDto.getData()));
         tempCerere.setStatus(cerereDto.getStatus());
         return cerereConverter.convertModelToDto(cerereService.updateCerere(tempCerere));
     }

@@ -34,7 +34,7 @@ export class DashboardAdminComponent {
 
   logout() {
     this.authService.logout();
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     this.router.navigate(['/login'])
   }
 }

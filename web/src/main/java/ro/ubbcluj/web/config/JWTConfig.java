@@ -1,4 +1,4 @@
-package ro.ubbcluj.web.config.jwt;
+package ro.ubbcluj.web.config;
 
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;

@@ -17,7 +17,7 @@ export class CereriComponent {
     subiect: string,
     descriere: string,
     data: string,
-    status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'IN_PROGRESS' | 'DONE'
+    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'IN_PROGRESS' | 'DONE'
   }[] = [];
 
   constructor(private authService: AuthService, private cereriService: CereriService, private router: Router) {

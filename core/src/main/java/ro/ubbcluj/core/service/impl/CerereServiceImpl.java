@@ -1,23 +1,22 @@
 package ro.ubbcluj.core.service.impl;
 
-import org.hibernate.usertype.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubbcluj.core.model.Cerere;
 import ro.ubbcluj.core.model.Role;
 import ro.ubbcluj.core.model.Status;
-import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.core.repository.CerereRepository;
 import ro.ubbcluj.core.repository.UserRepository;
 import ro.ubbcluj.core.service.CerereService;
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -60,11 +59,18 @@ public class CerereServiceImpl implements CerereService {
         log.trace("addCerere: cerere={}", cerere);
 
 //        // Dacă user-ul nu este setat, ia utilizatorul curent din SecurityContext
-//        if (cerere.getUser() == null) {
-//            User currentUser = getCurrentUser();
-//            cerere.setUser(currentUser);
-//            log.debug("Set current user for cerere: {}", currentUser.getUsermane());
-//        }
+        if (cerere.getUser() == null) {
+            org.springframework.security.core.userdetails.User userAuthenticated =
+            (org.springframework.security.core.userdetails.User) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+
+            ro.ubbcluj.core.model.User dbUser = userRepository.findAll().stream()
+                    .filter(u -> u.getEmail().equals(userAuthenticated.getUsername()))
+                    .findFirst().orElseThrow();
+
+            cerere.setUser(dbUser);
+            log.debug("Set current user for cerere: {}", dbUser.getUsermane());
+        }
         // Setează status default dacă este null
         if (cerere.getStatus() == null) {
             cerere.setStatus(Status.PENDING);
