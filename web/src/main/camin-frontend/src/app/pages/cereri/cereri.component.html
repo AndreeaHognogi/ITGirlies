@@ -15,40 +15,31 @@
   </div>
 </div>
 
-
 <div class="page-header">
-  <h2>Dashboard Admin - Cereri </h2>
+  <h2>Dashboard Admin - Cereri</h2>
   <button class="add-button" (click)="addCerere()">Adaugă cerere</button>
 </div>
 
 <div class="page-content">
   <div class="request-card" *ngFor="let cerere of this.cereri">
-    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>
+<!--    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>-->
     <div class="card-info"><strong>Subiect:</strong> {{cerere.subiect}}</div>
     <div class="card-info"><strong>Descriere:</strong> {{cerere.descriere }}</div>
     <div class="card-info"><strong>Data:</strong> {{ cerere.data }}</div>
     <div class="card-info"><strong>Status cerere:</strong> {{ cerere.status }}</div>
-    <div class="card-actions" *ngIf="cerere.status === 'PENDING'">
-      <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'ACCEPTED')">
-        Acceptă
-      </button>
-      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'REJECTED')">
-        Refuză
-      </button>
-      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'IN_PROGRESS')">
-        In progres
-      </button>
-      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'DONE')">
-        Terminat
-      </button>
-    </div>
+    <div class="card-actions">
+         <div *ngIf="cerere.status === 'PENDING'">
+      <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'ACCEPTED')">Acceptă</button>
+      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'REJECTED')">Refuză</button>
+<!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'IN_PROGRESS')">In progres</button>-->
+<!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'DONE')">Terminat</button>-->
+      </div>
       <button class="accept-button" (click)="editCerere(cerere.id)">Editează</button>
       <button class="decline-button" (click)="deleteCerere(cerere.id)">Șterge</button>
     </div>
-
-<!--  <button (click)="goToUser(cereri.user.id)">Vezi locatar</button>-->
-
+  </div>
 </div>
+
 <div class="bottom-banner">© IT GIRLIES 2025</div>
 
 
@@ -69,7 +60,3 @@
 <!--    <button type="submit" [disabled]="!cerereForm.form.valid">TRIMITEȚI</button>-->
 <!--  </form>-->
 <!--</div>-->
-
-<div class="bottom-banner">
-  © IT GIRLIES 2025
-</div>

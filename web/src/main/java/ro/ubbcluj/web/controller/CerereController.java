@@ -36,6 +36,7 @@ public class CerereController {
         log.trace("getCereri: cereri: {}", cereri);
         return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
     }
+    //aici trebuie sa modific in functie de rol ca sa vada fiecare cererile lui si admin toate
 
     @RequestMapping(value= "/cereri/users", method = RequestMethod.GET)
     public List<CerereDto> getCereriForCurrentUser() {

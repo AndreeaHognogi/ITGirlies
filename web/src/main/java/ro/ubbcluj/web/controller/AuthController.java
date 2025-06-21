@@ -10,12 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.core.service.UserService;
-import ro.ubbcluj.web.config.JWTConfig;
+import ro.ubbcluj.web.config.jwt.JWTConfig;
 import ro.ubbcluj.web.dto.AuthLoginRequestDto;
 import ro.ubbcluj.web.dto.UserDto;
 import ro.ubbcluj.web.converter.UserConverter;
 
-import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +25,7 @@ import java.util.Optional;
 public class AuthController {
 
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
-
-    @Autowired
+@Autowired
     private JWTConfig jwtConfig;
 
     @Autowired
@@ -79,10 +77,27 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody UserDto userDto) {
         log.trace("register: {}", userDto.getEmail());
 
-        User user = userConverter.convertDtoToModel(userDto);
-        user.setValidated(false);
+//        User user = userConverter.convertDtoToModel(userDto);
+//        user.setValidated(false);
+//
+//        User created = userService.addUser(user);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(userConverter.convertModelToDto(created));
 
-        User created = userService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userConverter.convertModelToDto(created));
+        Optional<User> existingUser = userService.findAll().stream()
+                .filter(u -> u.getEmail().equals(userDto.getEmail()))
+                .findFirst();
+
+        if (existingUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Email already in use");
+        }
+
+        User user = userConverter.convertDtoToModel(userDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setValidated(false); // Implicit: așteaptă validarea de la un admin
+
+        User savedUser = userService.addUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(userConverter.convertModelToDto(savedUser));
     }
 }

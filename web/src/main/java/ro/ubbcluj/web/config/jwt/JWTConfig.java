@@ -1,6 +1,5 @@
-package ro.ubbcluj.web.config;
+package ro.ubbcluj.web.config.jwt;
 
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
