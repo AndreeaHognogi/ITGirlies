@@ -1,4 +1,4 @@
-package ro.ubbcluj.web.config.jwt;
+package ro.ubbcluj.core.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,7 +11,7 @@ import ro.ubbcluj.core.service.UserService;
 
 import java.util.Optional;
 
-@Service
+@Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

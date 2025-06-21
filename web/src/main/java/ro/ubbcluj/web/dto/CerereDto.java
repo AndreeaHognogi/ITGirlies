@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ro.ubbcluj.core.model.Status;
 import ro.ubbcluj.core.model.User;
 
@@ -20,10 +21,7 @@ import java.util.Date;
 public class CerereDto extends BaseDto{
     private String subiect;
     private String descriere;
-    private LocalDate data;
-//    @JsonProperty("status")
-//    @JsonDeserialize(using = EmptyStringAsNullDeserializer.class)
+    private String data;
     private Status status;
-//    private User user;
 
 }

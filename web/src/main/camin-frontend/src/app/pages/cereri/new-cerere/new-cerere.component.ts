@@ -18,8 +18,7 @@ export class NewCerereComponent {
     subiect: '',
     descriere: '',
     data: '',
-    status: '',
-    // user: '',
+    status: ''
   };
 
   constructor(

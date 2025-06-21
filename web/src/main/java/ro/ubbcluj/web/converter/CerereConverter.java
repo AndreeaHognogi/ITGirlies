@@ -19,16 +19,9 @@ public class CerereConverter extends AbstractConverterBaseEntityConverter<Cerere
         Cerere cerere = new Cerere();
         cerere.setSubiect(cerereDto.getSubiect());
         cerere.setDescriere(cerereDto.getDescriere());
-        cerere.setData(cerereDto.getData());
+        cerere.setData(LocalDate.parse(cerereDto.getData()));
         cerere.setStatus(cerereDto.getStatus());
         return cerere;
-//    Cerere cerere = Cerere.builder()
-//            .subiect(cerereDto.getSubiect())
-//            .descriere(cerereDto.getDescriere())
-//            .data(cerereDto.getData())
-//            .status(cerereDto.getStatus())
-////            .user(cerereDto.getUser())
-//            .build();
 
     }
 
@@ -37,10 +30,10 @@ public class CerereConverter extends AbstractConverterBaseEntityConverter<Cerere
         CerereDto cerereDto = CerereDto.builder()
                 .subiect(cerere.getSubiect())
                 .descriere(cerere.getDescriere())
-                .data(cerere.getData())
+                .data(cerere.getData().toString())
                 .status(cerere.getStatus())
-//                .user(cerere.getUser())
                 .build();
+        cerereDto.setId(cerere.getId());
 
     return cerereDto;
     }

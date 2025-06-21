@@ -22,14 +22,14 @@
 
 <div class="page-content">
   <div class="request-card" *ngFor="let cerere of this.cereri">
-<!--    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>-->
+    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>
     <div class="card-info"><strong>Subiect:</strong> {{cerere.subiect}}</div>
     <div class="card-info"><strong>Descriere:</strong> {{cerere.descriere }}</div>
     <div class="card-info"><strong>Data:</strong> {{ cerere.data }}</div>
     <div class="card-info"><strong>Status cerere:</strong> {{ cerere.status }}</div>
     <div class="card-actions">
          <div *ngIf="cerere.status === 'PENDING'">
-      <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'ACCEPTED')">Acceptă</button>
+      <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'APPROVED')">Acceptă</button>
       <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'REJECTED')">Refuză</button>
 <!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'IN_PROGRESS')">In progres</button>-->
 <!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'DONE')">Terminat</button>-->
