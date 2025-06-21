@@ -52,26 +52,13 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('authToken');
   }
-  // getDecodedToken(): Object {
-  //   try {
-  //     return jwtDecode(localStorage.getItem('authToken') || '') || {};
-  //   }
-  //   catch (e) {
-  //     console.log("Nu ai token!")
-  //     return {}
-  //   }
-  // }
-  getDecodedToken(): any {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      console.log('Tokenul nu există.');
-      return null;
-    }
+  getDecodedToken(): Object {
     try {
-      return jwtDecode(token);
-    } catch (e) {
-      console.error('Token invalid sau expirat!', e);
-      return null;
+      return jwtDecode(localStorage.getItem('authToken') || '') || {};
+    }
+    catch (e) {
+      console.log("Nu ai token!")
+      return {}
     }
   }
 }

@@ -11,7 +11,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './cereri.component.html',
   styleUrl: './cereri.component.css'
 })
-export class CereriComponent implements OnInit{
+export class CereriComponent {
   cereri :{
     id: string,
     subiect: string,
@@ -30,37 +30,6 @@ export class CereriComponent implements OnInit{
       error: (err) => console.error('Eroare la get all cereri', err)
     })
   }
-
-  ngOnInit() {
-    const role = this.authService.getDecodedToken()?.role;
-    if (role === 'Locatar') {
-      this.loadCereriUser(); // doar cererile propriului utilizator
-    } else {
-      this.loadAllCereri(); // toate cererile
-    }
-  }
-  loadCereriUser(): void {
-    this.cereriService.getCereriByUser().subscribe({
-      next: (cereri) => {
-        this.cereri = cereri;
-      },
-      error: (err) => {
-        console.error('Eroare la încărcarea cererilor userului:', err);
-      }
-    });
-  }
-
-  loadAllCereri(): void {
-    this.cereriService.getCereri().subscribe({
-      next: (cereri) => {
-        this.cereri = cereri;
-      },
-      error: (err) => {
-        console.error('Eroare la încărcarea tuturor cererilor:', err);
-      }
-    });
-  }
-
 
   logout() {
     this.authService.logout();
@@ -99,19 +68,5 @@ export class CereriComponent implements OnInit{
   addCerere() {
     this.router.navigate(['/cereri/new']);
   }
-
-  goToUser(userId: number) {
-    this.router.navigate(['/users', userId]);
-  }
-
-
-  // onSubmit() {
-  //   console.log('Cerere trimisă:', {
-  //     // nume: this.nume,
-  //     // camera: this.camera,
-  //     // specializare: this.specializare,
-  //     // problema: this.problema
-  //   });
-  // }
 }
 
