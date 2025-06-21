@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import {CereriService} from '../../services/cereri.service';
+import {Cerere} from '../../services/cerere.model';
 
 @Component({
   selector: 'app-dashboard-angajat',
@@ -10,15 +12,26 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './dashboard-angajat.component.html',
   styleUrls: ['./dashboard-angajat.component.css']
 })
-export class DashboardAngajatComponent {
-  // cereri = [
-  //   { id: 1, camera: 101, descriere: '...' },
-  //   { id: 2, camera: 105, descriere: '...' },
-  //   { id: 3, camera: 130, descriere: '...' }
-  // ];
+export class DashboardAngajatComponent implements OnInit{
+  cereri: Cerere[] = [];
 
-  constructor(private authService: AuthService, private router: Router) {}
-  //
+  constructor(private cereriService: CereriService, private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.cereriService.getCereri().subscribe(data => {
+      this.cereri = data;
+    });
+  }
+
+  goToCereri() {
+    this.router.navigate(['/cereri']);
+  }
+  finalizeazaCerere(cerere: Cerere): void {
+    const updated = { ...cerere, status: 'DONE' };
+    this.cereriService.updateCerere(cerere.id, updated).subscribe(() => {
+      cerere.status = 'DONE';
+    });
+  }
   // preiaCerere(id: number) {
   //   console.log(`Cererea ${id} a fost preluată.`);
   // }

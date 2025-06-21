@@ -2,6 +2,10 @@ plugins {
     id 'java'
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
 
     //jpa
@@ -21,4 +25,6 @@ dependencies {
 //    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
 
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3'
+
+    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: "$jaxbapiVersion"
 }

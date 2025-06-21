@@ -90,68 +90,100 @@
   flex-grow: 1;
 }
 
-
-
-
-
 h2 {
   color: white;
   margin-bottom: 20px;
 }
 
+
+/* ======= PAGE HEADER ======= */
 .page-header {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100px;
-  margin: 20px 30px 10px;
+  margin: 30px 0 20px;
+  gap: 10px;
 }
 
 .page-header h2 {
-  margin: 0;
   color: white;
   font-size: 24px;
   font-weight: 600;
+  margin: 0;
 }
 
+/* ======= BUTON ADAUGĂ CERERE ======= */
+.add-button {
+  margin: 10px auto 30px auto;
+  padding: 10px 20px;
+  background-color: #002b5c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+}
+
+.add-button:hover {
+  background-color: #004080;
+}
+
+/* ======== CERERI / CARDURI ========= */
 .page-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 0 30px 40px;
   flex-grow: 1;
-  padding: 0 30px;
 }
 
 .request-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: white;
   color: #002b5c;
   padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.request-card:hover {
+  transform: scale(1.02);
+}
 
-.card-info p {
-  margin: 0;
-  padding: 2px 0;
+.card-info {
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .card-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .accept-button,
+.reject-button,
 .decline-button {
   padding: 8px 14px;
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .accept-button {
   background-color: #003f7d;
+  color: white;
+  border: none;
+}
+
+.reject-button {
+  background-color: #f44336;
   color: white;
   border: none;
 }
@@ -162,6 +194,7 @@ h2 {
   border: 2px solid #003f7d;
 }
 
+/* ======= FOOTER ======= */
 .bottom-banner {
   width: 100%;
   background-color: white;
@@ -169,29 +202,4 @@ h2 {
   padding: 10px 0;
   font-size: 12px;
   color: #002b5c;
-}
-
-
-.card-info.wide {
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.card-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.decline-button.small {
-  padding: 8px 12px;
-  width: 36px;
-  height: 36px;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 50%;
 }

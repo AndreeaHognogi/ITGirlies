@@ -1,5 +1,10 @@
 apply plugin: 'war'
 
+
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation project(':core')
 
@@ -15,10 +20,12 @@ dependencies {
 //    implementation group: 'javax.servlet', name: 'javax.servlet-api', version:"$javaxServeletApiVersion"
 // https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
     compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: "$javaxServeletApiVersion"
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3'
+//    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3'
 
 //    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
-//    implementation("org.springframework.security:spring-security-web:6.5.1")
+    implementation("org.springframework.security:spring-security-web:6.5.1")
 //    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
-//    implementation("org.springframework.security:spring-security-config:6.5.1")
+    implementation("org.springframework.security:spring-security-config:6.5.1")
+
+    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: "$jaxbapiVersion"
 }
