@@ -17,7 +17,7 @@ export class CereriComponent {
     subiect: string,
     descriere: string,
     data: string,
-    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'IN_PROGRESS' | 'DONE'
+    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'DONE'
   }[] = [];
 
   constructor(private authService: AuthService, private cereriService: CereriService, private router: Router) {
@@ -34,6 +34,10 @@ export class CereriComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login'])
+  }
+
+  goBack(): void {
+    this.router.navigate(['/dashboard-admin']);
   }
 
   editCerere(cerereId: string) {

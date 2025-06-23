@@ -11,7 +11,10 @@ public enum Status {
     APPROVED,
 
     @JsonProperty("REJECTED")
-    REJECTED;
+    REJECTED,
+
+    @JsonProperty("DONE")
+    DONE;
 
     // Permite deserializarea din string gol către null
     @JsonCreator
