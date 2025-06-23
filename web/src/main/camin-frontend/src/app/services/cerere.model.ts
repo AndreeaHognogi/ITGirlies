@@ -3,7 +3,7 @@ export interface Cerere {
   subiect: string,
   descriere: string;
   data: string;
-  status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'IN_PROGRESS' | 'DONE';
+  status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'DONE';
 
   // angajatId?: number; // opțional, dacă vrei să salvezi angajatul care a preluat cererea
 }

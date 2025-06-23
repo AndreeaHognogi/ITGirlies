@@ -7,5 +7,4 @@ public enum Role {
     Admin,
     Angajat,
     Locatar,
-    ROLE_ADMIN
 }

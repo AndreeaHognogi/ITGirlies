@@ -39,6 +39,10 @@ export class UsersComponent {
     this.router.navigate(['/login'])
   }
 
+  goBack(): void {
+    this.router.navigate(['/dashboard-admin']);
+  }
+
   editUser(userId: string) {
     this.router.navigate([`/users/${userId}`]);
   }

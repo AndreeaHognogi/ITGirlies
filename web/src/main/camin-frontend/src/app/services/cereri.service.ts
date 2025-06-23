@@ -12,7 +12,7 @@ export class CereriService {
     subiect: string,
     descriere: string,
     data: string,
-    status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'IN_PROGRESS' | 'DONE';
+    status: 'PENDING' | 'APPROVED' | 'REJECTED' |  'DONE';
   }[] = [];
 
   constructor(private http: HttpClient) {

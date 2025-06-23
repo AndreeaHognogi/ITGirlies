@@ -64,7 +64,8 @@ public class CerereController {
     @RequestMapping(value = "/cereri/{cerereId}", method = RequestMethod.PUT)
     public CerereDto updateCerere(
             @PathVariable("cerereId") final Long cerereId,
-            @RequestBody final CerereDto cerereDto) {
+            @RequestBody final CerereDto cerereDto,
+            @RequestHeader("authorization") String jwt) {
         log.trace("updateCerere: cerereDto: {}", cerereDto);
         Cerere tempCerere = new Cerere();
         tempCerere.setId(cerereId);
