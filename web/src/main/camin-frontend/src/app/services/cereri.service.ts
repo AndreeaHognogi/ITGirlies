@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {SERVER_API_URL} from '../constants';
+import {Cerere} from './cerere.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,9 @@ export class CereriService {
     return this.http.delete(`${SERVER_API_URL}/cereri/${cerereId}`);
   }
 
-  getCereriByUser(): Observable<any> {
-    return this.http.get(`${SERVER_API_URL}/cereri/users`);
+
+  getCereriByUserId(userId: number): Observable<Cerere[]> {
+    return this.http.get<Cerere[]>(`${SERVER_API_URL}/cereri/${userId}`);
   }
+
 }

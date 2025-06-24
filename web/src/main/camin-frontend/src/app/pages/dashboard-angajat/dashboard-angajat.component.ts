@@ -24,7 +24,7 @@ export class DashboardAngajatComponent implements OnInit{
   }
 
   goToCereri() {
-    this.router.navigate(['/cereri']);
+    this.router.navigate(['/cereri-angajat']);
   }
   finalizeazaCerere(cerere: Cerere): void {
     const updated = { ...cerere, status: 'DONE' };

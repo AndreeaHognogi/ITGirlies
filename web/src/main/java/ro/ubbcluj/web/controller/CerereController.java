@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ro.ubbcluj.core.model.Cerere;
@@ -23,6 +24,9 @@ import java.util.List;
 @RestController
 public class CerereController {
     private static final Logger log = LoggerFactory.getLogger(CerereController.class);
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CerereService cerereService;
@@ -87,6 +91,17 @@ public class CerereController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+//    @GetMapping("/users/{userId}/cereri")
+//    public List<Cerere> getCereriByUser(@PathVariable Long userId) {
+//        return cerereService.getCereriByUserId(userId);
+//    }
+
+//    @GetMapping("/cereri")
+//    public List<Cerere> getCereriUserCurent(Authentication auth) {
+//        User user = userService.findByUsername(auth.getName());
+//        return cerereService.getCereriByUserId(user.getId());
+//    }
 
 
 }

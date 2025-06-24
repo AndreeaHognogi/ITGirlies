@@ -10,5 +10,7 @@ import java.util.List;
 
 public interface CerereRepository extends JpaRepository<Cerere, Long> {
 
-    List<Cerere> findByUserRole(Role role);
+//    List<Cerere> findByUserRole(Role role);
+//    List<Cerere> findByUserId(Long userId);
+
 }

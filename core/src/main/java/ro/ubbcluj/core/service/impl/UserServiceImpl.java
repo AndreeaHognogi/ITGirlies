@@ -79,4 +79,22 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
         log.trace("deleteById --- method completed; deleteUsser={}", id);
     }
+
+    @Transactional
+    @Override
+    public boolean resetPassword(String email, String newPassword) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

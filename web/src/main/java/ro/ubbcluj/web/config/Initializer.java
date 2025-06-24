@@ -17,7 +17,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     protected Class<?>[] getRootConfigClasses() {
         return new Class[] {
                 AppLocalConfig.class,
-                SecurityConfig.class // ✅ must be included
+                SecurityConfig.class //must be included
         };
     }
 
