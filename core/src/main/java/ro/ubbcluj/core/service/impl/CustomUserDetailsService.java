@@ -34,7 +34,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .username(user.getEmail())
                 .password(user.getPassword())
                 .authorities(new SimpleGrantedAuthority(user.getRole().name()))
-                .accountLocked(!user.getValidated())
+//                .accountLocked(!user.getValidated())
+                .accountLocked(false)
                 .build();
     }
 }

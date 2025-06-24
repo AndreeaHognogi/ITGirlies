@@ -27,7 +27,7 @@ export class DashboardLocatarComponent implements OnInit{
   }
 
   goToCereri() {
-    this.router.navigate(['/cereri']);
+    this.router.navigate(['/cereri-locatar']);
   }
 
   logout() {

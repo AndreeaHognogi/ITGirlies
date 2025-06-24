@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import ro.ubbcluj.core.service.impl.CustomUserDetailsService;
 import ro.ubbcluj.web.config.JwtService;
 import ro.ubbcluj.web.converter.UserConverter;
 import ro.ubbcluj.web.dto.AuthLoginRequestDto;
+import ro.ubbcluj.web.dto.ResetPasswordDto;
 import ro.ubbcluj.web.dto.UserDto;
 
 import java.util.HashMap;
@@ -53,18 +55,24 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody AuthLoginRequestDto authRequest) {
         log.trace("login: {} {} {}", authRequest.getEmail(), authRequest.getPassword(), passwordEncoder.encode(authRequest.getPassword()));
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
+            );
+        }catch (BadCredentialsException ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credentiale invalide");
+        }
 
-        Optional<User> userOpt = userService.findAll().stream()
-                .filter(u -> u.getEmail().equals(authRequest.getEmail()) &&
-                        passwordEncoder.matches(authRequest.getPassword(), u.getPassword()))
-                .findFirst();
+//        Optional<User> userOpt = userService.findAll().stream()
+//                .filter(u -> u.getEmail().equals(authRequest.getEmail()) &&
+//                        passwordEncoder.matches(authRequest.getPassword(), u.getPassword()))
+//                .findFirst();
+
+        Optional<User> userOpt = userService.findByEmail(authRequest.getEmail());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            String jwtToken = jwtService.generateToken(user);
 
+            String jwtToken = jwtService.generateToken(user);
             Map<String, String> response = new HashMap<>();
             response.put("token", jwtToken);
 
@@ -72,11 +80,12 @@ public class AuthController {
                 log.info("Userul {} nu are dreptul sa se logheze, nu e inca validat!", user.getEmail());
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User has to be validated first by an admin!");
             }
-
             return ResponseEntity.ok().body(response);
+
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credentiale invalide");
         }
+
     }
 
     @PostMapping("/register")
@@ -105,5 +114,22 @@ public class AuthController {
         User savedUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userConverter.convertModelToDto(savedUser));
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDto resetDto) {
+        log.trace("resetPassword: {}", resetDto.getEmail());
+
+        Map<String, String> response = new HashMap<>();
+
+        boolean result = userService.resetPassword(resetDto.getEmail(), resetDto.getNewPassword());
+
+        if (result) {
+            response.put("message", "Parola a fost resetată cu succes.");
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "Emailul nu a fost găsit.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 }

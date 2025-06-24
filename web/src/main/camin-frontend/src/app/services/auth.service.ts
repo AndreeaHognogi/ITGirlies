@@ -8,10 +8,12 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
+
   getRoleFromToken() {
       // @ts-ignore
     return this.getDecodedToken()?.role || '';
   }
+
   isTokenExpired(): boolean {
     const decodedToken = this.getDecodedToken();
 
@@ -45,13 +47,15 @@ export class AuthService {
     return this.http.post(`${SERVER_API_URL}/auth/register`, userData);
   }
 
-  recoverPassword(email: string): Observable<any> {
-    return this.http.post(`${SERVER_API_URL}/recover-password`, { email });
+  // recoverPassword(email: string): Observable<any> {
+  //   return this.http.post(`${SERVER_API_URL}/recover-password`, { email });
+  // }
+
+  resetPassword(email: string, newPassword: string): Observable<any> {
+    return this.http.post(`${SERVER_API_URL}/auth/reset-password`, { email, newPassword });
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('authToken');
-  }
+
   getDecodedToken(): Object {
     try {
       return jwtDecode(localStorage.getItem('authToken') || '') || {};
@@ -60,5 +64,17 @@ export class AuthService {
       console.log("Nu ai token!")
       return {}
     }
+  }
+  getCurrentUserId(): number | null {
+    const userJson = localStorage.getItem('user'); // sau sessionStorage.getItem(...)
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      return user.id; // sau user.userId, în funcție de ce ai salvat
+    }
+    return null;
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('user');
   }
 }

@@ -22,6 +22,10 @@ export const routes: Routes = [
       import('./pages/login/login.component').then((c) => c.LoginComponent),
   },
   {
+    path: 'reset-password',
+    loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+  },
+  {
     path: 'register',
     loadComponent: () =>
       import('./pages/register/register.component').then((c) => c.RegisterComponent),
@@ -120,17 +124,3 @@ export const routes: Routes = [
       import('./pages/login/login.component').then((c) => c.LoginComponent),
   }
 ];
-// {
-//   canActivate: [roleGuard],
-//   data: { expectedRole: 'Admin' },
-//   path: 'cereri/new',
-//   loadComponent: () =>
-//     import('./pages/cereri/new-cerere/new-cerere.component').then(m => m.NewCerereComponent)
-// },
-// {
-//   canActivate: [roleGuard],
-//   data: { expectedRole: 'Admin' },
-//   path: 'cereri/:id',
-//   loadComponent: () =>
-//     import('./pages/cereri/edit-cerere/edit-cerere.component').then(m => m.EditCerereComponent)
-// },
