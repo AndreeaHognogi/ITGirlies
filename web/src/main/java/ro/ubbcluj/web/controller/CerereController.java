@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,19 +35,44 @@ public class CerereController {
     @Autowired
     CerereConverter cerereConverter;
 
-    @RequestMapping(value= "/cereri", method = RequestMethod.GET)
-    public List<CerereDto> getCereri() {
-        log.trace("getCereri");
-        List<Cerere> cereri = cerereService.findAll();
-        log.trace("getCereri: cereri: {}", cereri);
-        return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
-    }
+//    @RequestMapping(value= "/cereri", method = RequestMethod.GET)
+//    public List<CerereDto> getCereri() {
+//        log.trace("getCereri");
+//        List<Cerere> cereri = cerereService.findAll();
+//        log.trace("getCereri: cereri: {}", cereri);
+//        return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
+//    }
     //aici trebuie sa modific in functie de rol ca sa vada fiecare cererile lui si admin toate
 
-    @RequestMapping(value= "/cereri/users", method = RequestMethod.GET)
-    public List<CerereDto> getCereriForCurrentUser() {
-        return List.of();
+    @PreAuthorize("hasRole('Admin')")
+    @RequestMapping(value= "/cereri", method = RequestMethod.GET)
+    public List<CerereDto> getCereri(Authentication authentication) {
+        // admin vede toate cererile
+        List<Cerere> cereri = cerereService.findAll();
+        return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
     }
+
+    @PreAuthorize("hasRole('Angajat')")
+    @RequestMapping(value= "/cereri/angajat", method = RequestMethod.GET)
+    public List<CerereDto> getCereriForCurrentUser(Authentication authentication) {
+        User user = userService.findByUsername(authentication.getName());
+        List<Cerere> cereri = cerereService.getCereriByUserId(user.getId());
+        return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
+    }
+
+    @PreAuthorize("hasRole('Locatar')")
+    @GetMapping("/cereri/locatar")
+    public List<CerereDto> getCereriForLocatar(Authentication authentication) {
+        log.trace("getCereriForLocatar - username: {}", authentication.getName());
+        User user = userService.findByUsername(authentication.getName());
+        List<Cerere> cereri = cerereService.getCereriByUserId(user.getId());
+        return new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
+    }
+
+//    @RequestMapping(value= "/cereri/users", method = RequestMethod.GET)
+//    public List<CerereDto> getCereriForCurrentUser() {
+//        return List.of();
+//    }
 
     @RequestMapping(value = "/cereri/{cerereId}", method = RequestMethod.GET)
     public CerereDto getCerereById(@PathVariable("cerereId") final Long cerereId) {

@@ -3,6 +3,7 @@ package ro.ubbcluj.core.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubbcluj.core.model.User;
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
         log.trace("updatedUser - {}", updateUser);
         updateUser.setFirstname(user.getFirstname());
         updateUser.setLastname(user.getLastname());
-        updateUser.setUsermane(user.getUsermane());
+        updateUser.setUsername(user.getUsername());
         updateUser.setEmail(user.getEmail());
         updateUser.setPhone(user.getPhone());
         updateUser.setRole(user.getRole());
@@ -96,5 +97,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 }

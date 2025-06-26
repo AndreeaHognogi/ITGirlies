@@ -14,8 +14,8 @@ import lombok.*;
 @Table(name = "app_user")
 public class User extends BaseEntity<Long> {
 
-    @Column(name = "usermane", nullable = false)
-    private String usermane;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "firstname", nullable = false)
     private String firstname;

@@ -113,14 +113,16 @@ export const routes: Routes = [
     data: { expectedRole: 'Angajat' },
     path: 'cereri-angajat',
     loadComponent: () =>
-      import('./pages/cereri/cereri.component').then(m => m.CereriComponent)
+      import('./pages/cereri-angajat/cereri-angajat.component').then(m => m.CereriAngajatComponent)
   },
-
 
   { path: 'unauthorized', component: UnauthorizedPageComponent },
   {
     path: '**',
     loadComponent: () =>
       import('./pages/login/login.component').then((c) => c.LoginComponent),
-  }
+  },
+
+  //data: { expectedRole: ['Admin', 'Angajat'] }
+
 ];

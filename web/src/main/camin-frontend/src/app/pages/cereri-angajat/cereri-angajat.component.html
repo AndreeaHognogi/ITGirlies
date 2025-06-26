@@ -1,0 +1,54 @@
+<div class="top-banner">
+  <div class="banner-text">
+    <h1>
+      CĂMINUL <span>LOREM IPSUM</span><br />
+      BUN VENIT!
+    </h1>
+  </div>
+
+  <div class="banner-logo">
+    <img src="assets/logo.jpg" alt="logo" />
+  </div>
+  <div class="logout-btn-container">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+    <button class="logout-btn" (click)="goBack()">Back to Dashboard</button>
+  </div>
+</div>
+<h2>Cereri de reparații aprobate de admin</h2>
+
+<div class="page-content">
+  <div class="request-card" *ngFor="let cerere of this.cereri">
+    <div class="card-info"><strong>ID:</strong> {{cerere.id}}</div>
+    <div class="card-info"><strong>Subiect:</strong> {{cerere.subiect}}</div>
+    <div class="card-info"><strong>Descriere:</strong> {{cerere.descriere }}</div>
+    <div class="card-info"><strong>Data:</strong> {{ cerere.data }}</div>
+    <div class="card-info"><strong>Status cerere:</strong> {{ cerere.status }}</div>
+    <button *ngIf="cerere.status === 'APPROVED'" class="finalize-button" (click)="finalizeazaCerere(cerere)">
+      Reparatie finalizată
+    </button>
+  </div>
+</div>
+<!--<table>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>Subiect</th>-->
+<!--    <th>Descriere</th>-->
+<!--    <th>Data</th>-->
+<!--    <th>Status</th>-->
+<!--    <th>Acțiuni</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let cerere of cereri">-->
+<!--    <td>{{ cerere.subiect }}</td>-->
+<!--    <td>{{ cerere.descriere }}</td>-->
+<!--    <td>{{ cerere.data }}</td>-->
+<!--    <td>{{ cerere.status }}</td>-->
+<!--    <td>-->
+
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+  <div class="bottom-banner">© IT GIRLIES 2025</div>
