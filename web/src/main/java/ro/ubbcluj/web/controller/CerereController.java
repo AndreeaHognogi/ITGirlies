@@ -14,9 +14,7 @@ import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.core.service.CerereService;
 import ro.ubbcluj.core.service.UserService;
 import ro.ubbcluj.web.converter.CerereConverter;
-import ro.ubbcluj.web.converter.UserConverter;
 import ro.ubbcluj.web.dto.CerereDto;
-import ro.ubbcluj.web.dto.UserDto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,18 +31,9 @@ public class CerereController {
     private CerereService cerereService;
 
     @Autowired
-    CerereConverter cerereConverter;
+    private CerereConverter cerereConverter;
 
-//    @RequestMapping(value= "/cereri", method = RequestMethod.GET)
-//    public List<CerereDto> getCereri() {
-//        log.trace("getCereri");
-//        List<Cerere> cereri = cerereService.findAll();
-//        log.trace("getCereri: cereri: {}", cereri);
-//        return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
-//    }
-    //aici trebuie sa modific in functie de rol ca sa vada fiecare cererile lui si admin toate
-
-    @PreAuthorize("hasRole('Admin')")
+//    @PreAuthorize("hasRole('Admin')")
     @RequestMapping(value= "/cereri", method = RequestMethod.GET)
     public List<CerereDto> getCereri(Authentication authentication) {
         // admin vede toate cererile
@@ -52,27 +41,14 @@ public class CerereController {
         return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
     }
 
-    @PreAuthorize("hasRole('Angajat')")
-    @RequestMapping(value= "/cereri/angajat", method = RequestMethod.GET)
-    public List<CerereDto> getCereriForCurrentUser(Authentication authentication) {
-        User user = userService.findByUsername(authentication.getName());
-        List<Cerere> cereri = cerereService.getCereriByUserId(user.getId());
-        return  new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
-    }
-
-    @PreAuthorize("hasRole('Locatar')")
-    @GetMapping("/cereri/locatar")
-    public List<CerereDto> getCereriForLocatar(Authentication authentication) {
-        log.trace("getCereriForLocatar - username: {}", authentication.getName());
-        User user = userService.findByUsername(authentication.getName());
+    @GetMapping("/cereri-for-users")
+    public List<CerereDto> getCereriForUser(Authentication authentication) {
+        String username = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+        log.trace("getCereriForUser - username: {}", username);
+        User user = userService.findUserByEmail(username);
         List<Cerere> cereri = cerereService.getCereriByUserId(user.getId());
         return new ArrayList<>(cerereConverter.convertModelsToDtos(cereri));
     }
-
-//    @RequestMapping(value= "/cereri/users", method = RequestMethod.GET)
-//    public List<CerereDto> getCereriForCurrentUser() {
-//        return List.of();
-//    }
 
     @RequestMapping(value = "/cereri/{cerereId}", method = RequestMethod.GET)
     public CerereDto getCerereById(@PathVariable("cerereId") final Long cerereId) {
@@ -83,8 +59,7 @@ public class CerereController {
     }
 
     @RequestMapping(value = "/cereri", method = RequestMethod.POST)
-    public CerereDto createCerere(@RequestBody final CerereDto cerereDto,
-                                  @RequestHeader("authorization") String jwt) {
+    public CerereDto createCerere(@RequestBody final CerereDto cerereDto) {
         log.trace("createCerere: cerereDto: {}", cerereDto);
         CerereDto resultCerereDto = cerereConverter.convertModelToDto(
                 cerereService.addCerere(cerereConverter.convertDtoToModel(cerereDto)));
@@ -117,17 +92,4 @@ public class CerereController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
-
-//    @GetMapping("/users/{userId}/cereri")
-//    public List<Cerere> getCereriByUser(@PathVariable Long userId) {
-//        return cerereService.getCereriByUserId(userId);
-//    }
-
-//    @GetMapping("/cereri")
-//    public List<Cerere> getCereriUserCurent(Authentication auth) {
-//        User user = userService.findByUsername(auth.getName());
-//        return cerereService.getCereriByUserId(user.getId());
-//    }
-
-
 }

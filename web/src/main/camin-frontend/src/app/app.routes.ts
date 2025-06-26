@@ -33,27 +33,6 @@ export const routes: Routes = [
   {
     canActivate: [roleGuard],
     data: { expectedRole: 'Admin' },
-    path: 'cereri',
-    loadComponent: () =>
-      import('./pages/cereri/cereri.component').then(m => m.CereriComponent)
-  },
-  {
-    canActivate: [roleGuard],
-    data: { expectedRole: 'Admin' },
-    path: 'cereri/new',
-    loadComponent: () =>
-      import('./pages/cereri/new-cerere/new-cerere.component').then(m => m.NewCerereComponent)
-  },
-  {
-    canActivate: [roleGuard],
-    data: { expectedRole: 'Admin' },
-    path: 'cereri/:id',
-    loadComponent: () =>
-      import('./pages/cereri/edit-cerere/edit-cerere.component').then(m => m.EditCerereComponent)
-  },
-  {
-    canActivate: [roleGuard],
-    data: { expectedRole: 'Admin' },
     path: 'dashboard-admin',
     loadComponent: () =>
       import('./pages/dashboard-admin/dashboard-admin.component').then(m => m.DashboardAdminComponent)
@@ -81,32 +60,31 @@ export const routes: Routes = [
   },
   {
     canActivate: [roleGuard],
+    data: { expectedRole: 'Admin' },
+    path: 'cereri',
+    loadComponent: () =>
+      import('./pages/cereri/cereri.component').then(m => m.CereriComponent)
+  },
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Admin' },
+    path: 'cereri/new',
+    loadComponent: () =>
+      import('./pages/cereri/new-cerere/new-cerere.component').then(m => m.NewCerereComponent)
+  },
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Admin' },
+    path: 'cereri/:id',
+    loadComponent: () =>
+      import('./pages/cereri/edit-cerere/edit-cerere.component').then(m => m.EditCerereComponent)
+  },
+  {
+    canActivate: [roleGuard],
     data: { expectedRole: 'Angajat' },
     path: 'dashboard-angajat',
     loadComponent: () =>
       import('./pages/dashboard-angajat/dashboard-angajat.component').then(m => m.DashboardAngajatComponent)
-  },
-  {
-    canActivate: [roleGuard],
-    data: { expectedRole: 'Locatar' },
-    path: 'dashboard-locatar',
-    loadComponent: () =>
-      import('./pages/dashboard-locatar/dashboard-locatar.component').then(m => m.DashboardLocatarComponent)
-  },
-
-  // {
-  //   canActivate: [roleGuard],
-  //   data: { expectedRole: ['Admin', 'Locatar', 'Angajat'] },  // presupunem că roleGuard știe să gestioneze asta
-  //   path: 'cereri',
-  //   loadComponent: () =>
-  //     import('./pages/cereri/cereri.component').then(m => m.CereriComponent)
-  // },
-  {
-    canActivate: [roleGuard],
-    data: { expectedRole: 'Locatar' },
-    path: 'cereri-locatar',
-    loadComponent: () =>
-      import('./pages/cereri/cereri.component').then(m => m.CereriComponent)
   },
   {
     canActivate: [roleGuard],
@@ -115,6 +93,29 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/cereri-angajat/cereri-angajat.component').then(m => m.CereriAngajatComponent)
   },
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Locatar' },
+    path: 'dashboard-locatar',
+    loadComponent: () =>
+      import('./pages/dashboard-locatar/dashboard-locatar.component').then(m => m.DashboardLocatarComponent)
+  },
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Locatar' },
+    path: 'cereri-locatar',
+    loadComponent: () =>
+      import('./pages/cereri-locatar/cereri-locatar.component').then(m => m.CereriLocatarComponent)
+  },
+
+  {
+    canActivate: [roleGuard],
+    data: { expectedRole: 'Locatar' },
+    path: 'cereri/locatar/new',
+    loadComponent: () =>
+      import('./pages/cereri-locatar/add-cerere/add-cerere.component').then(m => m.AddCerereComponent)
+  },
+
 
   { path: 'unauthorized', component: UnauthorizedPageComponent },
   {

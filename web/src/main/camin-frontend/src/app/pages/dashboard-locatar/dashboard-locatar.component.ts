@@ -18,12 +18,9 @@ export class DashboardLocatarComponent implements OnInit{
   constructor(private cereriService: CereriService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.cereriService.getCereri().subscribe(data => {
+    this.cereriService.getCereriForCurrentUser().subscribe(data => {
       this.cereri = data;
     });
-    // if (!this.authService.isLoggedIn()) {
-    //   this.router.navigate(['/login']);
-    // }
   }
 
   goToCereri() {

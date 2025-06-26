@@ -13,7 +13,8 @@ public interface CerereService {
     Cerere updateCerere(Cerere cerere);
     void deleteById(Long id);
     List<Cerere> getCereriByUserId(Long userId);
-    List<Cerere> getCereriByUserIdAndStatus(Long userId, Status status);
+//    List<Cerere> getCereriByUserIdAndStatus(Long userId, Status status);
 
+ List<Cerere> getCereriForUser(String username);
 
 }

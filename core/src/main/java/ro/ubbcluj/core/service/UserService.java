@@ -14,5 +14,6 @@ public interface UserService {
     void deleteById(Long id);
     boolean resetPassword(String email, String newPassword);
     Optional<User> findByEmail(String email);
+    User findUserByEmail(String email);
     User findByUsername(String username);
 }
