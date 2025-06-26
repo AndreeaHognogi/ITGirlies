@@ -1,0 +1,45 @@
+<div class="top-banner">
+  <div class="banner-text">
+    <h1>
+      CĂMINUL <span>LOREM IPSUM</span><br />
+      BUN VENIT!
+    </h1>
+  </div>
+
+  <div class="banner-logo">
+    <img src="assets/logo.jpg" alt="logo" />
+  </div>
+  <div class="logout-btn-container">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+    <button class="logout-btn" (click)="goBack()">Back to Dashboard</button>
+  </div>
+</div>
+
+<h2>Cererile mele</h2>
+
+<button class="logout-btn"  (click)="addCerere()">Adaugă cerere nouă</button>
+
+<ul *ngIf="cereri.length > 0; else noCereri">
+  <li *ngFor="let cerere of cereri">
+    <strong>{{ cerere.subiect }}</strong> - {{ cerere.descriere }} <br />
+    <em>Status: {{ cerere.status }}</em>
+    <div *ngIf="cerere.status === 'APPROVED'">
+      ✅ Cererea a fost aprobată. Un angajat va veni în curând.
+    </div>
+    <div *ngIf="cerere.status === 'DONE'">
+      ✅ Cererea a fost rezolvată.
+    </div>
+    <div *ngIf="cerere.status === 'PENDING'">
+      ⏳ Cererea este în așteptare.
+    </div>
+    <div *ngIf="cerere.status === 'REJECTED'">
+      ❌ Cererea a fost respinsă.
+    </div>
+  </li>
+</ul>
+
+<ng-template #noCereri>
+  <p>Nu ai cereri înregistrate.</p>
+</ng-template>
+
+<div class="bottom-banner">© IT GIRLIES 2025</div>
