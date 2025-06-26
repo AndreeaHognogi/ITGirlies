@@ -10,6 +10,6 @@ public interface CerereRepository extends JpaRepository<Cerere, Long> {
 
     List<Cerere> findByUser(User username);
 
-    List<Cerere> findByUserAndStatus(User username, Status status);
+//    List<Cerere> findByUserAndStatus(User username, Status status);
 
 }

@@ -121,11 +121,19 @@ public class CerereServiceImpl implements CerereService {
     }
 
     @Override
-    public List<Cerere> getCereriByUserIdAndStatus(Long userId, Status status) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        return cerereRepository.findByUserAndStatus(user, status);
+    public List<Cerere> getCereriForUser(String email) {
+        // usernameOrEmail este de fapt emailul autentificat (din token)
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+        return cerereRepository.findByUser(user);
     }
+
+//    @Override
+//    public List<Cerere> getCereriByUserIdAndStatus(Long userId, Status status) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+//        return cerereRepository.findByUserAndStatus(user, status);
+//    }
 
 
 }

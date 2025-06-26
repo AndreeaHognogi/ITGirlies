@@ -38,6 +38,14 @@ export class CereriService {
     return this.http.delete(`${SERVER_API_URL}/cereri/${cerereId}`);
   }
 
+  getCereriForCurrentUser(): Observable<any>  {
+    return this.http.get(`${SERVER_API_URL}/cereri-for-users`);
+  }
+
+  addCereriLocatar (cerereLocatar: any): Observable<any> {
+    return this.http.post(`${SERVER_API_URL}/cereri`, cerereLocatar);
+  }
+
 // Obține cererile aprobate pentru angajat
   getCereriAprobate() {
     return this.http.get<{id:string, subiect:string, descriere:string, data:string, status: string}[]>('/cereri/aprobate');
@@ -47,8 +55,6 @@ export class CereriService {
   updateStatusCerere(cerereId: string, status: string) {
     return this.http.put(`/cereri/${cerereId}/status`, {status});
   }
-
-
 
   getCereriByUserId(userId: number): Observable<Cerere[]> {
     return this.http.get<Cerere[]>(`${SERVER_API_URL}/cereri/${userId}`);
