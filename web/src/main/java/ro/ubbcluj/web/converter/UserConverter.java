@@ -22,7 +22,7 @@ public class UserConverter extends AbstractConverterBaseEntityConverter<User, Us
         User user = new User();
         user.setLastname(userDto.getLastname());
         user.setFirstname(userDto.getFirstname());
-        user.setUsermane(userDto.getUsername());
+        user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
         user.setPhone(userDto.getPhone());
@@ -36,7 +36,7 @@ public class UserConverter extends AbstractConverterBaseEntityConverter<User, Us
         UserDto userDto = UserDto.builder()
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
-                .username(user.getUsermane())
+                .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .phone(user.getPhone())

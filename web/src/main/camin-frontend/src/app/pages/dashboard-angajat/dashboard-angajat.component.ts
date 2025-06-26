@@ -32,13 +32,6 @@ export class DashboardAngajatComponent implements OnInit{
       cerere.status = 'DONE';
     });
   }
-  // preiaCerere(id: number) {
-  //   console.log(`Cererea ${id} a fost preluată.`);
-  // }
-  //
-  // stergeCerere(id: number) {
-  //   this.cereri = this.cereri.filter(cerere => cerere.id !== id);
-  // }
 
   logout() {
     this.authService.logout();

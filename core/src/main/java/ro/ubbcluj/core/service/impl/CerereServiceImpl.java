@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubbcluj.core.model.Cerere;
 import ro.ubbcluj.core.model.Status;
+import ro.ubbcluj.core.model.User;
 import ro.ubbcluj.core.repository.CerereRepository;
 import ro.ubbcluj.core.repository.UserRepository;
 import ro.ubbcluj.core.service.CerereService;
@@ -65,7 +66,7 @@ public class CerereServiceImpl implements CerereService {
                     .findFirst().orElseThrow();
 
             cerere.setUser(dbUser);
-            log.debug("Set current user for cerere: {}", dbUser.getUsermane());
+            log.debug("Set current user for cerere: {}", dbUser.getUsername());
         }
         // Setează status default dacă este null
         if (cerere.getStatus() == null) {
@@ -112,13 +113,19 @@ public class CerereServiceImpl implements CerereService {
         log.trace("deleteOrder: result={}", id);
     }
 
-//    @Override
-//    public List<Cerere> getCereriByUserId(Long userId) {
-//        return cerereRepository.findByUserId(userId);
-//    }
+    @Override
+    public List<Cerere> getCereriByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return cerereRepository.findByUser(user);
+    }
 
-//    public List<Cerere> findByRole(Role role) {
-//        return cerereRepository.findByUserRole(role);
-//    }
+    @Override
+    public List<Cerere> getCereriByUserIdAndStatus(Long userId, Status status) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return cerereRepository.findByUserAndStatus(user, status);
+    }
+
 
 }

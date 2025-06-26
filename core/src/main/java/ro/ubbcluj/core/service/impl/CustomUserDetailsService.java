@@ -11,7 +11,8 @@ import ro.ubbcluj.core.service.UserService;
 
 import java.util.Optional;
 
-@Service("customUserDetailsService")
+//@Service("customUserDetailsService")
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

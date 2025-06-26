@@ -58,7 +58,7 @@ public class UserController {
         tempUser.setId(userId);
         tempUser.setFirstname(userDto.getFirstname());
         tempUser.setLastname(userDto.getLastname());
-        tempUser.setUsermane(userDto.getUsername());
+        tempUser.setUsername(userDto.getUsername());
         tempUser.setPassword(userDto.getPassword());
         tempUser.setEmail(userDto.getEmail());
         tempUser.setPhone(userDto.getPhone());
