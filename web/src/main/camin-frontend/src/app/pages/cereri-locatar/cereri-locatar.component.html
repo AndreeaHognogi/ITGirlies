@@ -15,28 +15,45 @@
   </div>
 </div>
 
+<div class="page-header">
 <h2>Cererile mele</h2>
-
 <button class="logout-btn"  (click)="addCerere()">Adaugă cerere nouă</button>
+</div>
+<div class="page-content">
+  <ng-container *ngIf="cereri.length > 0; else noCereri">
+    <div class="request-card" *ngFor="let cerere of cereri">
+      <div class="card-info">
+        <h3>{{ cerere.subiect }}</h3>
+        <p>{{ cerere.descriere }}</p>
+        <p><strong>Status:</strong>
+          <span
+            [ngClass]="{
+              'status-approved': cerere.status === 'APPROVED',
+              'status-done': cerere.status === 'DONE',
+              'status-pending': cerere.status === 'PENDING',
+              'status-rejected': cerere.status === 'REJECTED'
+            }">
+            {{ cerere.status }}
+          </span>
+        </p>
+      </div>
 
-<ul *ngIf="cereri.length > 0; else noCereri">
-  <li *ngFor="let cerere of cereri">
-    <strong>{{ cerere.subiect }}</strong> - {{ cerere.descriere }} <br />
-    <em>Status: {{ cerere.status }}</em>
-    <div *ngIf="cerere.status === 'APPROVED'">
-      ✅ Cererea a fost aprobată. Un angajat va veni în curând.
+      <div class="card-status-message">
+        <ng-container [ngSwitch]="cerere.status">
+          <p *ngSwitchCase="'APPROVED'">✅ Cererea a fost aprobată. Un angajat va veni în curând.</p>
+          <p *ngSwitchCase="'DONE'">✅ Cererea a fost rezolvată.</p>
+          <p *ngSwitchCase="'PENDING'">⏳ Cererea este în așteptare.</p>
+          <p *ngSwitchCase="'REJECTED'">❌ Cererea a fost respinsă.</p>
+        </ng-container>
+      </div>
     </div>
-    <div *ngIf="cerere.status === 'DONE'">
-      ✅ Cererea a fost rezolvată.
-    </div>
-    <div *ngIf="cerere.status === 'PENDING'">
-      ⏳ Cererea este în așteptare.
-    </div>
-    <div *ngIf="cerere.status === 'REJECTED'">
-      ❌ Cererea a fost respinsă.
-    </div>
-  </li>
-</ul>
+  </ng-container>
+
+  <ng-template #noCereri>
+    <p style="color: white; text-align: center;">Nu există cereri momentan.</p>
+  </ng-template>
+</div>
+
 
 <ng-template #noCereri>
   <p>Nu ai cereri înregistrate.</p>

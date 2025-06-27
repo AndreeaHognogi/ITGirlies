@@ -183,21 +183,42 @@ h2 {
 }
 
 .accept-button {
-  background-color: #003f7d;
+  background-color: #f9a825; /* galben închis */
   color: white;
   border: none;
 }
 
 .reject-button {
-  background-color: #f44336;
+  background-color: red;
   color: white;
   border: none;
 }
 
 .decline-button {
+  margin: 10px auto 30px auto;
+  padding: 10px 20px;
   background-color: white;
-  color: #003f7d;
+  color: #002b5c;
   border: 2px solid #003f7d;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+}
+
+.done-button {
+  background-color: #388e3c; /* verde */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.done-button:hover {
+  background-color: #2e7d32; /* verde mai închis la hover */
 }
 
 /* ======= FOOTER ======= */
