@@ -200,6 +200,76 @@ h2 {
   border: 2px solid #003f7d;
 }
 
+/* ======== STATUSURI CERERI (text color) ========= */
+.status-approved {
+  color: #0d6efd; /* albastru - aprobat */
+  font-weight: bold;
+}
+
+.status-done {
+  color: #2e7d32; /* verde - rezolvat */
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #f9a825; /* galben - în așteptare */
+  font-weight: bold;
+}
+
+.status-rejected {
+  color: #c62828; /* roșu - respins */
+  font-weight: bold;
+}
+
+/* ======== MESAJ STATUS CERERE ========= */
+.card-status-message p {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #002b5c;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Poți adăuga culori diferite pentru fundalul mesajelor în funcție de status dacă dorești: */
+.card-status-message p:has(.status-approved) {
+  background-color: #e3f2fd;
+}
+.card-status-message p:has(.status-done) {
+  background-color: #e8f5e9;
+}
+.card-status-message p:has(.status-pending) {
+  background-color: #fffde7;
+}
+.card-status-message p:has(.status-rejected) {
+  background-color: #ffebee;
+}
+
+/* ======== CARDURI (păstrează restul codului tău) ========= */
+.request-card {
+  background-color: white;
+  color: #002b5c;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.request-card:hover {
+  transform: scale(1.02);
+}
+
+.card-info {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
 /* ======= FOOTER ======= */
 .bottom-banner {
   width: 100%;
