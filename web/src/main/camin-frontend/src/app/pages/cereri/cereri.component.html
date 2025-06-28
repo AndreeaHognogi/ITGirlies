@@ -29,15 +29,18 @@
     <div class="card-info"><strong>Data:</strong> {{ cerere.data }}</div>
     <div class="card-info"><strong>Status cerere:</strong> {{ cerere.status }}</div>
     <div class="card-actions">
-         <div *ngIf="cerere.status === 'PENDING'">
-      <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'APPROVED')">Acceptă</button>
-      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'REJECTED')">Refuză</button>
-<!--      <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'IN_PROGRESS')">In progres</button>-->
-      <button class="done-button" (click)="validateCerere(cerere.id, cerere, 'DONE')">Terminat</button>
+      <div class="top-buttons" *ngIf="cerere.status === 'PENDING'">
+        <button class="accept-button" (click)="validateCerere(cerere.id, cerere, 'APPROVED')">Acceptă</button>
+        <button class="reject-button" (click)="validateCerere(cerere.id, cerere, 'REJECTED')">Refuză</button>
+        <button class="done-button" (click)="validateCerere(cerere.id, cerere, 'DONE')">Terminat</button>
       </div>
-      <button class="add-button" (click)="editCerere(cerere.id)">Editează</button>
-      <button class="decline-button" (click)="deleteCerere(cerere.id)">Șterge</button>
+
+      <div class="bottom-buttons">
+        <button class="add-button" (click)="editCerere(cerere.id)">Editează</button>
+        <button class="decline-button" (click)="deleteCerere(cerere.id)">Șterge</button>
+      </div>
     </div>
+
   </div>
 </div>
 
